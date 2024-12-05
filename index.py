@@ -8,7 +8,7 @@ sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
 from bfabric_web_apps import create_app, load_config, get_layout_with_side_panel, display_page_generic
 
 #Load configuration for the Dash app.
-config = load_config()
+config = load_config("./PARAMS.py")
 
 # Initialize the app
 app = create_app()
