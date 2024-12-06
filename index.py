@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import components
 
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
-from bfabric_web_apps import create_app, load_config, get_layout_with_side_panel, display_page_generic
+from bfabric_web_apps import create_app, load_config, get_layout_with_side_panel, display_page_generic, update_tab_content, submit_bug_report
 
 #Load configuration for the Dash app.
 config = load_config("./PARAMS.py")
@@ -19,12 +19,8 @@ main_content = [html.P("Main Content")]
 
 app_title = "Bfabric App Template"
 
-# Select a layout
-app.layout = html.Div(
-children=[
-    get_layout_with_side_panel(app_title),
-    components.get_template_app_specific_layout()
-])
+# Define app layout
+app.layout = get_layout_with_side_panel(app_title)
 
 @app.callback(
     [
@@ -42,6 +38,44 @@ def display_page(url_params):
     """
     token, tdata, entity_data, page_content, page_title = display_page_generic(url_params, app_title)
     return token, tdata, entity_data, page_content, page_title
+
+
+@app.callback(
+    Output("tab-content", "children"),
+    [Input("tabs", "active_tab")],
+)
+def handle_tab_content(active_tab):
+    """
+    Dynamically update tab content based on the selected tab.
+    """
+    if active_tab == "main":
+        # Render the app-specific layout for the main tab
+        return components.get_template_app_specific_layout()
+    elif active_tab == "documentation":
+        # Render documentation content
+        return update_tab_content("documentation", None, None)
+    elif active_tab == "report-bug":
+        # Render bug reporting content
+        return update_tab_content("report-bug", None, None)
+    else:
+        # Default fallback
+        return html.Div("This tab does not exist.")
+
+@app.callback(
+    [
+        Output("alert-fade-bug", "is_open"),
+        Output("alert-fade-bug-fail", "is_open")
+    ],
+    [Input("submit-bug-report", "n_clicks")],
+    [State("bug-description", "value"), State("token", "data"), State("entity", "data")],
+    prevent_initial_call=True
+)
+def handle_bug_report(n_clicks, bug_description, token, entity_data):
+    """
+    Delegates to the submit_bug_report function.
+    """
+    is_open, is_fail = submit_bug_report(n_clicks, bug_description, token, entity_data)
+    return is_open, is_fail
 
 @app.callback(
     [
