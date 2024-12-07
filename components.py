@@ -45,7 +45,6 @@ def get_template_app_specific_layout():
                 html.Div(
                     id="page-content",
                     children=[
-                        *no_auth,
                         html.Div(id="auth-div")  # Placeholder for `auth-div` to be updated dynamically
                     ],
                     style={

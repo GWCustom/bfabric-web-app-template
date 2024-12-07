@@ -1,65 +1,42 @@
 import sys
-from dash import html
 from dash import Input, Output, State, html
-import dash_bootstrap_components as dbc
-import components
-
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
-from bfabric_web_apps import create_app, load_config, get_layout_with_side_panel, display_page_generic, update_tab_content, submit_bug_report
 
-#Load configuration for the Dash app.
+from bfabric_web_apps import create_app, load_config, get_static_layout, display_page_generic, submit_bug_report
+from components import get_template_app_specific_layout
+import components
+import dash_bootstrap_components as dbc
+
+# Load configuration for the Dash app.
 config = load_config("./PARAMS.py")
 
 # Initialize the app
 app = create_app()
 
-# Sidebar content and main content for customization
-sidebar_content = [html.P("Sidebar Content")]
-main_content = [html.P("Main Content")]
-
+# App title
 app_title = "Bfabric App Template"
 
+# Specific content for the Main tab
+main_content = get_template_app_specific_layout()
+
 # Define app layout
-app.layout = get_layout_with_side_panel(app_title)
+app.layout = get_static_layout(app_title, main_content)
 
 @app.callback(
     [
         Output('token', 'data'),
         Output('token_data', 'data'),
         Output('entity', 'data'),
-        Output('page-content', 'children'),
         Output('page-title', 'children'),
     ],
     [Input('url', 'search')]
 )
 def display_page(url_params):
     """
-    Integrates the generic function into the app callback.
+    Callback for processing URL parameters and managing authentication.
     """
-    token, tdata, entity_data, page_content, page_title = display_page_generic(url_params, app_title)
-    return token, tdata, entity_data, page_content, page_title
-
-
-@app.callback(
-    Output("tab-content", "children"),
-    [Input("tabs", "active_tab")],
-)
-def handle_tab_content(active_tab):
-    """
-    Dynamically update tab content based on the selected tab.
-    """
-    if active_tab == "main":
-        # Render the app-specific layout for the main tab
-        return components.get_template_app_specific_layout()
-    elif active_tab == "documentation":
-        # Render documentation content
-        return update_tab_content("documentation", None, None)
-    elif active_tab == "report-bug":
-        # Render bug reporting content
-        return update_tab_content("report-bug", None, None)
-    else:
-        # Default fallback
-        return html.Div("This tab does not exist.")
+    token, tdata, entity_data, _, page_title = display_page_generic(url_params, app_title)
+    return token, tdata, entity_data, page_title
 
 @app.callback(
     [
@@ -76,6 +53,7 @@ def handle_bug_report(n_clicks, bug_description, token, entity_data):
     """
     is_open, is_fail = submit_bug_report(n_clicks, bug_description, token, entity_data)
     return is_open, is_fail
+
 
 @app.callback(
     [
@@ -97,7 +75,7 @@ def handle_bug_report(n_clicks, bug_description, token, entity_data):
 )
 def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_data):
     """
-    Combined callback for managing UI elements and the auth-div content.
+    Updates the main UI elements dynamically based on user interactions.
     """
     # Handle sidebar and input disabling based on token_data
     if token_data is None:
@@ -109,8 +87,15 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
 
     # Handle auth-div content
     if not entity_data or not token_data:
-        auth_div_content = None
+        auth_div_content = html.Div(children=components.no_auth)
     else:
+        component_data = [
+            html.H1("Component Data:"),
+            html.P(f"Slider Value: {slider_val}"),
+            html.P(f"Dropdown Value: {dropdown_val}"),
+            html.P(f"Input Value: {input_val}"),
+            html.P(f"Button Clicks: {n_clicks}")
+        ]
         entity_details = [
             html.H1("Entity Data:"),
             html.P(f"Entity Class: {token_data['entityClass_data']}"),
@@ -119,22 +104,10 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
             html.P(f"Created: {entity_data['created']}"),
             html.P(f"Modified: {entity_data['modified']}"),
         ]
-        auth_div_content = dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        html.H1("Component Data:"),
-                        html.P(f"Slider Value: {slider_val}"),
-                        html.P(f"Dropdown Value: {dropdown_val}"),
-                        html.P(f"Input Value: {input_val}"),
-                        html.P(f"Button Clicks: {n_clicks}")
-                    ]
-                ),
-                dbc.Col(entity_details),
-            ]
-        )
+        auth_div_content = dbc.Row([dbc.Col(component_data), dbc.Col(entity_details)])
 
     return (*sidebar_state, auth_div_content)
- 
+
+
 if __name__ == "__main__":
     app.run_server(debug=True, port=config["PORT"], host=config["HOST"])
