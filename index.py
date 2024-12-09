@@ -3,7 +3,7 @@ from dash import Input, Output, State, html
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
 
 from bfabric_web_apps import create_app, load_config, get_static_layout, display_page_generic, submit_bug_report
-from components import get_template_app_specific_layout
+from components import get_template_app_specific_layout, get_documentation_content
 import components
 import dash_bootstrap_components as dbc
 
@@ -20,7 +20,7 @@ app_title = "Bfabric App Template"
 main_content = get_template_app_specific_layout()
 
 # Define app layout
-app.layout = get_static_layout(app_title, main_content)
+app.layout = get_static_layout(app_title, main_content, get_documentation_content())
 
 @app.callback(
     [
@@ -28,6 +28,7 @@ app.layout = get_static_layout(app_title, main_content)
         Output('token_data', 'data'),
         Output('entity', 'data'),
         Output('page-title', 'children'),
+        Output('session-details', 'children'),
     ],
     [Input('url', 'search')]
 )
@@ -35,12 +36,12 @@ def display_page(url_params):
     """
     Callback for processing URL parameters and managing authentication.
     """
-    token, tdata, entity_data, _, page_title = display_page_generic(url_params, app_title)
-    return token, tdata, entity_data, page_title
+    token, tdata, entity_data, _, page_title, session_details = display_page_generic(url_params)
+    return token, tdata, entity_data, page_title, session_details
 
 @app.callback(
     [
-        Output("alert-fade-bug", "is_open"),
+        Output("alert-fade-bug-success", "is_open"),
         Output("alert-fade-bug-fail", "is_open")
     ],
     [Input("submit-bug-report", "n_clicks")],
