@@ -133,17 +133,13 @@ For more details, visit the [Dash official documentation](https://dash.plotly.co
 
 ## Usage
 
-Bfabric Web Apps provide a user-friendly interface for managing and validating scientific data. Here are some key use cases:
+This template provides a practical implementation of the bfabric-web-app library. Key use cases include:
 
-1. **Data Upload and Validation**:
-   - Ensure data integrity before uploading to Bfabric.
-   - Flag missing or incorrect data fields with detailed user warnings.
+1. Setting up a Dash-based web application.
 
-2. **Custom Dashboards**:
-   - Generate dynamic dashboards for data visualization and analysis.
+2. Demonstrating data validation and API interaction with Bfabric.
 
-3. **Error Alerts**:
-   - Notify users of potential data inconsistencies during data import or export.
+3. Serving as a starting point for custom scientific or analytical dashboards.
 
 _For detailed examples and usage guides, refer to the [Documentation](https://pypi.org/project/bfabric-web-apps/)._
 
