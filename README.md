@@ -32,7 +32,7 @@
     <img src="logo.png" alt="Logo" width="80" height="50.6">
   </a>
 
-<h3 align="center">Bfabric Web Apps Template</h3>
+<h3 align="center">Bfabric Web App Template</h3>
 
   <p align="center">
     A fully functional template app to demonstrate the usage of the `bfabric-web-app` Python library.
@@ -70,6 +70,7 @@
       <a href="#what-is-dash">What Is Dash?</a>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#deployment">Deployment</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -144,6 +145,105 @@ This template provides a practical implementation of the bfabric-web-app library
 _For detailed examples and usage guides, refer to the [Documentation](https://pypi.org/project/bfabric-web-apps/)._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Deployment
+
+Follow these steps to set up and deploy the Bfabric Web App Template locally:
+
+### 1. Fork and Clone the Repository
+
+1. **Fork** the repository to your GitHub account.
+2. Clone the forked repository to your local machine:
+   
+   ```sh
+   git clone https://github.com/GWCustom/bfabric-web-app-template.git
+   cd bfabric-web-app-template
+   ```
+
+
+### 2. Set Up a Virtual Environment
+
+Choose one of the following options to create and activate a virtual environment:
+
+#### Using `virtualenv`:
+   ```sh
+   python3 -m venv my_app_1
+   source my_app_1/bin/activate  # Linux/Mac
+   my_app_1\Scripts\activate     # Windows
+   ```
+
+#### Using `conda`:
+   ```sh
+   conda create -n my_app_1 pip
+   conda activate my_app_1
+   ```
+
+#### Using `mamba`:
+   ```sh
+   mamba create -n my_app_1 pip
+   mamba activate my_app_1
+   ```
+
+
+### 3. Install Dependencies
+
+Once the virtual environment is active, install the required dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+
+### 4. Configure Your Application
+
+Create a file named `PARAMS.py` in the project root directory to define configuration parameters for the app.
+
+**Example `PARAMS.py`**:
+   ```python
+   # PARAMS.py
+   HOST = "0.0.0.0"  # Host to run the app (default: localhost)
+   PORT = 8050       # Port to serve the application
+   DEV = False       # Enable/disable debug mode
+   CONFIG_FILE_PATH = "~/.bfabricpy.yml"  # Path to the configuration file for credentials
+   ```
+
+### 5. Set Up `.bfabricpy.yml` Configuration File
+
+The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the Bfabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
+
+Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`) and format it as follows:
+
+**Example `.bfabricpy.yml`**:
+   ```yaml
+   GENERAL:
+     default_config: PRODUCTION
+
+   PRODUCTION:
+     login: your_username
+     password: your_password
+     base_url: https://your-bfabric-api-endpoint
+   ```
+
+- **`login`**: The Bfabric user login.
+- **`password`**: The corresponding password for the user.
+- **`base_url`**: The base API endpoint for your Bfabric instance.
+
+Ensure the file is saved in the specified path and accessible by the application.
+
+
+### 6. Run the Application
+
+Start the development server by running:
+   ```sh
+   python3 index.py
+   ```
+
+
+### 7. Check It Out
+
+Visit the following URL to see your application in action:
+   ```sh
+   http://localhost:8050
+   ```
 
 
 ## Roadmap
