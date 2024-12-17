@@ -18,14 +18,11 @@ from dash import Input, Output, State, html
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
 
 from bfabric_web_apps import create_app, load_config, get_static_layout, display_page_generic, submit_bug_report
-from components import get_template_app_specific_layout
 import components
 import dash_bootstrap_components as dbc
 
-# Load configuration for the Dash app.
-# The configuration file (PARAMS.py) contains host, port, DEV, and the config file path to the .bfabricpy.yml file.
-# The .bfabricpy.yml contains the login, password, and base URL. This is needed to log in as a power user.
-# load_config: Reads the PARAMS.py file and parses the configuration settings for the app.
+
+# Here we read the PARAMS.py file and parse the configuration settings for the app from PARAMS.py per https://github.com/GWCustom/bfabric-web-app-template
 config = load_config("./PARAMS.py")
 
 # Initialize the Dash application.
@@ -35,106 +32,54 @@ app = create_app()
 # App title that will appear in the browser tab.
 app_title = "Bfabric App Template"
 
-# Define the content for the main section of the app.
-# This layout is specific to the current application and is defined in the components.py file.
-main_content = get_template_app_specific_layout()
+# Define the content to be displayed in the User Interface:
+app.layout = get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
+    app_title,                          # The app title we defined previously
+    components.app_specific_layout,     # The main content for the app defined in components.py
+    components.documentation_content    # Documentation content for the app defined in components.py
+)
 
-'''
-Define the app.layout using the get_static_layout method from bfabric_web_apps.
-The parameters passed are:
-
-- app_title: A specific title for the app.
-- main_content: The main content for the app, defined in the components.py file.
-- documentation_content: Documentation content specific to the app, designed in the components.py file.
-
-get_static_layout: Combines the app title, main content, and documentation into a structured layout.
-'''
-app.layout = get_static_layout(app_title, main_content, components.documentation_content)
-
+# This function updates various data stores in the User Interface which can be referenced later by your 
+# custom callback functions. This function is necessary for handling authentication and URL parameters.
 @app.callback(
     [
-        Output('token', 'data'),
-        Output('token_data', 'data'),
-        Output('entity', 'data'),
-        Output('page-title', 'children'),
-        Output('session-details', 'children'),
+        Output('token', 'data'),                # Output the authentication token to the 'token' data store.
+        Output('token_data', 'data'),           # Output the token data to the 'token_data' data store.
+        Output('entity', 'data'),               # Output the entity data to the 'entity' data store.
+        Output('page-title', 'children'),       # Output the page title to the 'page-title' children.
+        Output('session-details', 'children'),  # Output the session details to the 'session-details' children.
     ],
-    [Input('url', 'search')]
+    [Input('url', 'search')]                    # The token which is extracted from the URL parameters.   
 )
 def display_page(url_params):
     """
+    DO NOT EDIT THIS FUNCTION.
     Callback for processing URL parameters and managing authentication.
-
-    Args:
-        url_params (str): URL parameters passed to the app.
-
-    Returns:
-        Tuple containing:
-            - token: Authentication token.
-            - token_data: Data associated with the authentication token.
-            - entity_data: Details of the authenticated entity.
-            - page_title: Title to display on the page.
-            - session_details: Information about the current session.
-
-    display_page_generic: A function from bfabric_web_apps that handles generic URL parsing
-    and returns the necessary data for authentication and page content setup.
     """
-    token, tdata, entity_data, _, page_title, session_details = display_page_generic(url_params)
-    return token, tdata, entity_data, page_title, session_details
 
-'''
-Define a callback to handle bug report submissions.
+    # Here we generate the necessary data for the app to function from the token recieved in the URL parameters.
+    return display_page_generic(url_params)
 
-The parameters passed are:
-- n_clicks: The number of times the "submit-bug-report" button was clicked.
-- bug_description: A string describing the bug to be submitted.
-- token: The authentication token for the session.
-- entity_data: Information about the authenticated entity.
 
-Returns:
-    - is_open: A boolean indicating whether the success alert should be displayed.
-    - is_fail: A boolean indicating whether the failure alert should be displayed.
-
-submit_bug_report: A bfabric_web_apps function that submits the bug report using the
-provided description, token, and entity data. It returns success and failure states.
-'''
+# This is the callback which handles bug report submissions. 
 @app.callback(
     [
-        Output("alert-fade-bug-success", "is_open"),
-        Output("alert-fade-bug-fail", "is_open")
+        Output("alert-fade-bug-success", "is_open"), # A bool indicating whether the success alert should be displayed.
+        Output("alert-fade-bug-fail", "is_open")     # A bool indicating whether the failure alert should be displayed.
     ],
-    [Input("submit-bug-report", "n_clicks")],
-    [State("bug-description", "value"), State("token", "data"), State("entity", "data")],
+    [Input("submit-bug-report", "n_clicks")],        # The number of times the "submit-bug-report" button was clicked.
+    [State("bug-description", "value"), State("token", "data"), State("entity", "data")], # State parameters for the bug report.
     prevent_initial_call=True
 )
 def handle_bug_report(n_clicks, bug_description, token, entity_data):
     """
+    DO NOT EDIT THIS FUNCTION.
     Delegates to the submit_bug_report function from bfabric_web_apps.
     """
-    is_open, is_fail = submit_bug_report(n_clicks, bug_description, token, entity_data)
-    return is_open, is_fail
+    # A bfabric_web_apps function that submits the bug report using the provided description, token, and entity data.  
+    return submit_bug_report(n_clicks, bug_description, token, entity_data)
 
-'''
-Define a callback to dynamically update UI components based on user input.
-This is an app-specific callback function. It updates content on the main page dynamically
-based on user interactions and authentication status.
 
-The parameters are:
-
-Inputs:
-    - slider_val: The current value of the slider.
-    - dropdown_val: The selected value from the dropdown.
-    - input_val: The current value of the input field.
-    - n_clicks: The number of clicks on the example button.
-    - token_data: Data associated with the authentication token.
-
-States:
-    - entity_data: Information about the authenticated entity.
-
-Returns:
-    - sidebar_state: Tuple indicating whether the sidebar and inputs should be disabled.
-    - auth_div_content: Content to be displayed in the authorization section.
-'''
 @app.callback(
     [
         Output('sidebar_text', 'hidden'),
@@ -154,9 +99,21 @@ Returns:
     [State('entity', 'data')]
 )
 def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_data):
+    
     """
-    Updates the main UI elements dynamically based on user interactions.
+    EDIT HERE! 
+
+    This is an example of a specific callback function for the app. You may edit this function to 
+    handle various user interactions and update the UI accordingly.
+    
+    Define a callback to dynamically update UI components based on user input.
+    This is an app-specific callback function. It updates content on the main page dynamically
+    based on user interactions and authentication status.
+
+    Specific details about app.callback functions can be found int he dash documentation:
+    https://dash.plotly.com/basic-callbacks
     """
+
     # Determine sidebar and input states based on token_data and development mode.
     if token_data is None:
         sidebar_state = (True, True, True, True, True)
@@ -189,6 +146,5 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
     return (*sidebar_state, auth_div_content)
 
 # Entry point for running the app.
-# If the script is run directly, the server starts with the specified configurations.
 if __name__ == "__main__":
     app.run_server(debug=True, port=config["PORT"], host=config["HOST"])

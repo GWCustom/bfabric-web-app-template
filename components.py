@@ -7,7 +7,6 @@ Each section provides specific elements like sidebars or authentication messages
 """
 
 # Sidebar layout components for user interaction.
-# Includes a slider, dropdown, input field, and a submit button.
 sidebar = [
     html.P(id="sidebar_text", children="Select a Value"),  # Sidebar header text.
     dcc.Slider(0, 20, 5, value=10, id='example-slider'),  # Slider for selecting a numeric value.
@@ -23,7 +22,7 @@ sidebar = [
     dbc.Button('Submit', id='example-button'),  # Button for user submission.
 ]
 
-# Content displayed when the user is not authenticated.
+# Here is the content to be displayed when the user is NOT authenticated.
 no_auth = [
     html.P("You are not currently logged into an active session. Please log into bfabric to continue:"),
     html.A('Login to Bfabric', href='https://fgcz-bfabric.uzh.ch/bfabric/')  # Link to the Bfabric login page.
@@ -32,14 +31,9 @@ no_auth = [
 # Placeholder for authenticated user content.
 auth = [html.Div(id="auth-div")]
 
-"""
-Documentation section for displaying app-specific information.
-Provides user guidance, feature descriptions, and developer contact details.
 
-Note:
-    The `documentation_content` must always be a list, as it is structured to include multiple
-    components like headings, paragraphs, and links. Any other format will cause the application to fail.
-"""
+# Documentation content for the app. This get's displayed under the "Documentation" tab.
+# This content must always be a list of dash components.
 documentation_content = [
     html.H2("Welcome to Bfabric App Template"),
     html.P(
@@ -53,7 +47,9 @@ documentation_content = [
     html.H4("Developer Info"),
     html.P(
         [
-            "This app was written by Griffin White, for the FGCZ. If you wish to report a bug, please use the \"bug reports\" tab. If you wish to contact the developer for other reasons, please use the email:",
+            """This app was written by Griffin White, for the FGCZ. 
+            If you wish to report a bug, please use the \"bug reports\" tab. 
+            If you wish to contact the developer for other reasons, please use the email:""",
             html.A(" griffin@gwcustom.com", href="mailto:griffin@gwcustom.com"),
         ]
     ),
@@ -105,20 +101,9 @@ documentation_content = [
     html.Br(),
 ]
 
-def get_template_app_specific_layout():
-    """
-    Constructs and returns the layout for the application.
-
-    The layout includes a sidebar for navigation and a main content area for displaying user-specific data or messages.
-
-    Note:
-        The function must always return a `dbc.Row` element structured as shown below.
-        Failure to return a `dbc.Row` will result in the application failing to render properly.
-
-    Returns:
-        dash.development.base_component.Component: The overall layout structure.
-    """
-    return dbc.Row(
+# Below is the primary layout for the app. This layout includes a sidebar and a main content area.
+# This object MUST be a "dbc.Row" element to render properly.
+app_specific_layout = dbc.Row(
         id="page-content-main",
         children=[
             dbc.Col(
