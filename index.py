@@ -17,7 +17,7 @@ import sys
 from dash import Input, Output, State, html
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
 
-from bfabric_web_apps import create_app, load_config, get_static_layout, display_page_generic, submit_bug_report
+from bfabric_web_apps import create_app, load_config, get_static_layout, process_url_and_token, submit_bug_report, get_logger, get_power_user_wrapper
 import components
 import dash_bootstrap_components as dbc
 
@@ -28,6 +28,7 @@ config = load_config("./PARAMS.py")
 # Initialize the Dash application.
 # create_app: Sets up the Dash app instance with necessary configurations and middleware for Bfabric integration.
 app = create_app()
+
 
 # App title that will appear in the browser tab.
 app_title = "Bfabric App Template"
@@ -51,14 +52,14 @@ app.layout = get_static_layout(         # The function from bfabric_web_apps tha
     ],
     [Input('url', 'search')]                    # The token which is extracted from the URL parameters.   
 )
-def display_page(url_params):
+def generic_process_url_and_token(url_params):
     """
     DO NOT EDIT THIS FUNCTION.
     Callback for processing URL parameters and managing authentication.
     """
 
     # Here we generate the necessary data for the app to function from the token recieved in the URL parameters.
-    return display_page_generic(url_params)
+    return process_url_and_token(url_params)
 
 
 # This is the callback which handles bug report submissions. 
@@ -71,7 +72,7 @@ def display_page(url_params):
     [State("bug-description", "value"), State("token", "data"), State("entity", "data")], # State parameters for the bug report.
     prevent_initial_call=True
 )
-def handle_bug_report(n_clicks, bug_description, token, entity_data):
+def generic_handle_bug_report(n_clicks, bug_description, token, entity_data):
     """
     DO NOT EDIT THIS FUNCTION.
     Delegates to the submit_bug_report function from bfabric_web_apps.
@@ -142,6 +143,43 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
             html.P(f"Modified: {entity_data['modified']}")
         ]
         auth_div_content = dbc.Row([dbc.Col(component_data), dbc.Col(entity_details)])
+
+
+        # How to get the Power User Wrapper  
+        # Use the `get_power_user_wrapper` function to initialize and retrieve the Power User Wrapper instance.  
+        # The `token_data` parameter must be provided.  
+
+        power_user_wrapper = get_power_user_wrapper(token_data)
+
+        # For detailed examples and advanced usage, consult the official documentation:  
+        # !!!ADD LINK TO SPECIFIC PART IN DOCUMENTATION!!!
+
+        # How to use the Logger  
+
+        # Step 1: Initialize the Logger instance
+        # Use the `get_logger` function to get a Logger instance. 
+        # The `token_data` parameter needs to be provided.
+
+        L = get_logger(token_data)
+
+        # Step 2: Log a message  
+        # Use the `log_operation` method of the Logger instance to log messages.
+        # This example demonstrates logging an operation with a descriptive message:
+
+        L.log_operation(
+            "Example Log",                       # Operation name
+            "This is an example of how to use the log_operation method.",  # Descriptive message
+            params=None,                         # (Optional) Additional parameters to log
+            flush_logs=True                      # (Optional) Flush logs immediately (default: True)
+        )
+
+        # Notes on usage:  
+        # The `Logger` class provides two primary ways to log operations:  
+        # 1. Using the `log_operation` method for general logging.  
+        # 2. Using the `logthis` method to wrap and log API calls.  
+
+        # For more details and examples on both methods, please refer to the official documentation:  
+        # !!!ADD LINK TO SPECIFIC PART IN DOCUMENTATION!!!
 
     return (*sidebar_state, auth_div_content)
 
