@@ -1,86 +1,177 @@
 '''
-The Bfabric web app template serves as a foundation for building new applications using the Bfabric web apps module.
-The Bfabric web apps module facilitates the rapid and professional development of visually appealing applications.
-To effectively use the template, a basic knowledge of Dash is required. It is recommended to review the documentation
-for Dash Fundamentals, Parts 1 to 4.
+Bfabric Web App Template
+========================
 
-- https://dash.plotly.com/layout
+This file serves as a user-editable template for building applications using the Bfabric web apps module. 
+Users can customize the layout, callbacks, and components in this file to suit their application's needs.
 
-It is also recommended to take a look at the Bfabric web apps documentation:
+Before starting, ensure a basic understanding of Dash and refer to the following resources:
+  - Dash Fundamentals (https://dash.plotly.com/layout)
+  - Bfabric Web Apps Documentation (https://pypi.org/project/bfabric-web-apps/)
 
-- https://pypi.org/project/bfabric-web-apps/
-
-To preview the template, execute this file and access the application on your localhost in the browser.
+To preview the template:
+1. Execute this file.
+2. Access the application on your localhost in the browser.
 '''
 
+# Required Imports
+# ----------------
 import sys
-from dash import Input, Output, State, html
+# Ensure the bfabric-web-apps module is accessible.
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
-
-from bfabric_web_apps import create_app, load_config, get_static_layout, process_url_and_token, submit_bug_report, get_logger, get_power_user_wrapper
-import components
+from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
+from bfabric_web_apps import load_config, get_static_layout, get_logger, get_power_user_wrapper
+import generic_bfabric
+from generic_bfabric import app
 
+# Sidebar Components
+# -------------------
+sidebar = [
+    html.P(id="sidebar_text", children="Select a Value"),  # Sidebar header text.
+    dcc.Slider(0, 20, 5, value=10, id='example-slider'),  # Slider for selecting a numeric value.
+    html.Br(),
+    dcc.Dropdown(
+        ['Genomics', 'Proteomics', 'Metabolomics'],  # Dropdown options.
+        'Genomics',  # Default value.
+        id='example-dropdown'  # Dropdown ID for callback integration.
+    ),
+    html.Br(),
+    dbc.Input(value='Enter Some Text', id='example-input'),  # Text input field.
+    html.Br(),
+    dbc.Button('Submit', id='example-button'),  # Button for user submission.
+]
 
+# App Layout
+# -----------
+# Below is the primary layout for the app. This layout includes a sidebar and a main content area.
+# This object MUST be a "dbc.Row" element to render properly.
+app_specific_layout = dbc.Row(
+        id="page-content-main",
+        children=[
+            dbc.Col(
+                html.Div(
+                    id="sidebar",
+                    children=sidebar,  # Sidebar content defined earlier.
+                    style={
+                        "border-right": "2px solid #d4d7d9",
+                        "height": "100%",
+                        "padding": "20px",
+                        "font-size": "20px"
+                    }
+                ),
+                width=3,  # Width of the sidebar column.
+            ),
+            dbc.Col(
+                html.Div(
+                    id="page-content",
+                    children=[
+                        html.Div(id="auth-div")  # Placeholder for `auth-div` to be updated dynamically.
+                    ],
+                    style={
+                        "margin-top": "20vh",
+                        "margin-left": "2vw",
+                        "font-size": "20px"
+                    }
+                ),
+                width=9,  # Width of the main content column.
+            ),
+        ],
+        style={"margin-top": "0px", "min-height": "40vh"}  # Overall styling for the row layout.
+    )
+
+# Documentation Content
+# ----------------------
+# Documentation content for the app. This get's displayed under the "Documentation" tab.
+# This content must always be a list of dash components.
+documentation_content = [
+    html.H2("Welcome to Bfabric App Template"),
+    html.P(
+        [
+            "This app serves as the user-interface for ",
+            html.A("Bfabric App Template,", href="#", target="_blank"),
+            " a versatile tool designed to help build and customize new applications.",
+        ]
+    ),
+    html.Br(),
+    html.H4("Developer Info"),
+    html.P(
+        [
+            """This app was written by Griffin White, for the FGCZ. 
+            If you wish to report a bug, please use the \"bug reports\" tab. 
+            If you wish to contact the developer for other reasons, please use the email:""",
+            html.A(" griffin@gwcustom.com", href="mailto:griffin@gwcustom.com"),
+        ]
+    ),
+    html.Br(),
+    html.H4("Main Features"),
+    html.P(
+        [
+            html.B("Feature 1 -- "),
+            "Brief description of Feature 1.",
+            html.Br(),
+            html.Br(),
+            html.B("Feature 2 -- "),
+            "Brief description of Feature 2.",
+            html.Br(),
+            html.Br(),
+            html.B("Feature 3 -- "),
+            "Brief description of Feature 3.",
+            html.Br(),
+            html.Br(),
+            html.B("Custom Flags -- "),
+            "Details about using custom flags for advanced configurations. Provide examples or references if applicable.",
+            html.Br(),
+            html.Br(),
+        ],
+        style={"margin-left": "2vw"},
+    ),
+    html.H4("Other Tabs"),
+    html.P(
+        [
+            "Descriptions of other tabs or features, such as:",
+            html.Br(),
+            html.B("Tab 1 -- "),
+            "Brief description of Tab 1 functionality.",
+            html.Br(),
+            html.B("Tab 2 -- "),
+            "Brief description of Tab 2 functionality.",
+            html.Br(),
+            html.B("Tab 3 -- "),
+            "Brief description of Tab 3 functionality.",
+        ],
+        style={"margin-left": "2vw"},
+    ),
+    html.Br(),
+    html.H4("Future Enhancements"),
+    html.P(
+        "This section can outline planned features or enhancements for the application.",
+        style={"margin-left": "2vw"},
+    ),
+    html.Br(),
+]
+
+# Load Configuration
+# -------------------
 # Here we read the PARAMS.py file and parse the configuration settings for the app from PARAMS.py per https://github.com/GWCustom/bfabric-web-app-template
 config = load_config("./PARAMS.py")
 
-# Initialize the Dash application.
-# create_app: Sets up the Dash app instance with necessary configurations and middleware for Bfabric integration.
-app = create_app()
-
-
+# Set Title
+# -------------------
 # App title that will appear in the browser tab.
 app_title = "Bfabric App Template"
 
+# Set App Layout
+# ---------------
 # Define the content to be displayed in the User Interface:
 app.layout = get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
     app_title,                          # The app title we defined previously
-    components.app_specific_layout,     # The main content for the app defined in components.py
-    components.documentation_content    # Documentation content for the app defined in components.py
+    app_specific_layout,     # The main content for the app defined in components.py
+    documentation_content    # Documentation content for the app defined in components.py
 )
 
-# This function updates various data stores in the User Interface which can be referenced later by your 
-# custom callback functions. This function is necessary for handling authentication and URL parameters.
-@app.callback(
-    [
-        Output('token', 'data'),                # Output the authentication token to the 'token' data store.
-        Output('token_data', 'data'),           # Output the token data to the 'token_data' data store.
-        Output('entity', 'data'),               # Output the entity data to the 'entity' data store.
-        Output('page-title', 'children'),       # Output the page title to the 'page-title' children.
-        Output('session-details', 'children'),  # Output the session details to the 'session-details' children.
-    ],
-    [Input('url', 'search')]                    # The token which is extracted from the URL parameters.   
-)
-def generic_process_url_and_token(url_params):
-    """
-    DO NOT EDIT THIS FUNCTION.
-    Callback for processing URL parameters and managing authentication.
-    """
-
-    # Here we generate the necessary data for the app to function from the token recieved in the URL parameters.
-    return process_url_and_token(url_params)
-
-
-# This is the callback which handles bug report submissions. 
-@app.callback(
-    [
-        Output("alert-fade-bug-success", "is_open"), # A bool indicating whether the success alert should be displayed.
-        Output("alert-fade-bug-fail", "is_open")     # A bool indicating whether the failure alert should be displayed.
-    ],
-    [Input("submit-bug-report", "n_clicks")],        # The number of times the "submit-bug-report" button was clicked.
-    [State("bug-description", "value"), State("token", "data"), State("entity", "data")], # State parameters for the bug report.
-    prevent_initial_call=True
-)
-def generic_handle_bug_report(n_clicks, bug_description, token, entity_data):
-    """
-    DO NOT EDIT THIS FUNCTION.
-    Delegates to the submit_bug_report function from bfabric_web_apps.
-    """
-    # A bfabric_web_apps function that submits the bug report using the provided description, token, and entity data.  
-    return submit_bug_report(n_clicks, bug_description, token, entity_data)
-
-
+# Callback for Updating UI
+# -------------------------
 @app.callback(
     [
         Output('sidebar_text', 'hidden'),
@@ -125,7 +216,7 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
 
     # Generate content for the auth-div based on authentication and entity data.
     if not entity_data or not token_data:
-        auth_div_content = html.Div(children=components.no_auth)
+        auth_div_content = html.Div(children=generic_bfabric.no_auth)
     else:
         component_data = [
             html.H1("Component Data:"),
@@ -145,22 +236,22 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
         auth_div_content = dbc.Row([dbc.Col(component_data), dbc.Col(entity_details)])
 
 
-        # How to get the Power User Wrapper  
+        # Get the Power User Wrapper
+        # -------------------------
         # Use the `get_power_user_wrapper` function to initialize and retrieve the Power User Wrapper instance.  
-        # The `token_data` parameter must be provided.  
-
-        power_user_wrapper = get_power_user_wrapper(token_data)
+         
+        power_user_wrapper = get_power_user_wrapper(token_data) # The `token_data` parameter must be provided. 
 
         # For detailed examples and advanced usage, consult the official documentation:  
         # !!!ADD LINK TO SPECIFIC PART IN DOCUMENTATION!!!
 
-        # How to use the Logger  
+        # Create Loggs
+        # -------------------------
 
         # Step 1: Initialize the Logger instance
-        # Use the `get_logger` function to get a Logger instance. 
-        # The `token_data` parameter needs to be provided.
+        # Use the `get_logger` function to get a Logger instance.   
 
-        L = get_logger(token_data)
+        L = get_logger(token_data) # The `token_data` parameter needs to be provided.
 
         # Step 2: Log a message  
         # Use the `log_operation` method of the Logger instance to log messages.
@@ -183,6 +274,7 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
 
     return (*sidebar_state, auth_div_content)
 
-# Entry point for running the app.
+# Run the Application
+# --------------------
 if __name__ == "__main__":
     app.run_server(debug=True, port=config["PORT"], host=config["HOST"])
