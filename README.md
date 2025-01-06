@@ -34,10 +34,9 @@
 
 <h3 align="center">B-Fabric Web App Template</h3>
 
-  <p align="center">
-    A fully functional template app to demonstrate the usage of the `bfabric-web-app` Python library.
-    <br />
-    <a href="https://pypi.org/project/bfabric-web-apps/"><strong>Explore the documentation »</strong></a>
+<p align="center">
+    A fully functional template app to demonstrate the usage of the 
+    <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-app</strong></a> Python library.
     <br />
     <br />
     <a href="https://github.com/GWCustom/bfabric-web-app-template">View Demo</a>
