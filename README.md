@@ -50,43 +50,27 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#what-is-bfabric">What Is B-Fabric?</a>
-    </li>
-    <li>
-      <a href="#what-is-bfabricpy">What Is BfabricPy?</a>
-    </li>
-    <li>
-      <a href="#what-is-dash">What Is Dash?</a>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#deployment">Deployment</a>
-      <ul>
-        <li><a href="#1-fork-and-clone-the-repository">1. Fork and Clone the Repository</a></li>
-        <li><a href="#2-set-up-a-virtual-environment">2. Set Up a Virtual Environment</a></li>
-        <li><a href="#3-install-dependencies">3. Install Dependencies</a></li>
-        <li><a href="#4-configure-your-application">4. Configure Your Application</a></li>
-        <li><a href="#5-set-up-bfabricpyyml-configuration-file">5. Set Up .bfabricpy.yml Configuration File</a></li>
-        <li><a href="#6-run-the-application">6. Run the Application</a></li>
-        <li><a href="#7-check-it-out">7. Check It Out</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## Table of Contents
+
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [What Is B-Fabric?](#what-is-bfabric)
+- [What Is BfabricPy?](#what-is-bfabricpy)
+- [What Is Dash?](#what-is-dash)
+- [Usage](#usage)
+- [Deployment](#deployment)
+  - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
+  - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
+  - [3. Install Dependencies](#3-install-dependencies)
+  - [4. Configure Your Application](#4-configure-your-application)
+  - [5. Set Up .bfabricpy.yml Configuration File](#5-set-up-bfabricpyyml-configuration-file)
+  - [6. Run the Application](#6-run-the-application)
+  - [7. Check It Out](#7-check-it-out)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgments](#acknowledgments)
 
 
 
