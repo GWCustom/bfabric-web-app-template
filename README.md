@@ -57,7 +57,6 @@
 - [What Is B-Fabric?](#what-is-bfabric)
 - [What Is BfabricPy?](#what-is-bfabricpy)
 - [What Is Dash?](#what-is-dash)
-- [Usage](#usage)
 - [Deployment](#deployment)
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
   - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
