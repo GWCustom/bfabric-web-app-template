@@ -32,7 +32,7 @@
     <img src="logo.png" alt="Logo" width="80" height="50.6">
   </a>
 
-<h3 align="center">Bfabric Web App Template</h3>
+<h3 align="center">B-Fabric Web App Template</h3>
 
   <p align="center">
     A fully functional template app to demonstrate the usage of the `bfabric-web-app` Python library.
@@ -60,7 +60,7 @@
       </ul>
     </li>
     <li>
-      <a href="#what-is-bfabric">What Is Bfabric?</a>
+      <a href="#what-is-bfabric">What Is B-Fabric?</a>
     </li>
     <li>
       <a href="#what-is-bfabricpy">What Is BfabricPy?</a>
@@ -93,11 +93,11 @@
 
 ## About The Project
 
-The `bfabric-web-app-template` serves as an example project built using the [`bfabric-web-app`](https://github.com/GWCustom/bfabric-web-apps) Python library. This template demonstrates how to quickly set up a web app that integrates with the Bfabric Laboratory Information Management System (LIMS). It provides a starting point for developers to build their custom applications.
+The `bfabric-web-app-template` serves as an example project built using the [`bfabric-web-app`](https://github.com/GWCustom/bfabric-web-apps) Python library. This template demonstrates how to quickly set up a web app that integrates with the B-Fabric Laboratory Information Management System (LIMS). It provides a starting point for developers to build their custom applications.
 
 Key Features:
 - **Preconfigured Setup**: Easily adapt the template to your use case.
-- **Integrated API Connection**: Demonstrates how to connect to Bfabric via the `bfabric-web-app` library.
+- **Integrated API Connection**: Demonstrates how to connect to B-Fabric via the `bfabric-web-app` library.
 - **Dash Dashboard Integration**: Includes examples of data visualization with Plotly Dash.
 - **Fully Documented Code**: Explore the codebase for learning and extension.
 
@@ -113,9 +113,9 @@ Key Features:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## What Is Bfabric?
+## What Is B-Fabric?
 
-Bfabric is a Laboratory Information Management System (LIMS) used for managing scientific experiments and their associated data in laboratories. It provides a platform for tracking samples, analyzing results, and organizing workflows efficiently. 
+B-Fabric is a Laboratory Information Management System (LIMS) used for managing scientific experiments and their associated data in laboratories. It provides a platform for tracking samples, analyzing results, and organizing workflows efficiently. 
 
 For more details, visit the [Bfabric official website](https://fgcz-bfabric.uzh.ch/bfabric/).
 
@@ -124,7 +124,7 @@ For more details, visit the [Bfabric official website](https://fgcz-bfabric.uzh.
 
 ## What Is BfabricPy?
 
-BfabricPy is a Python library that provides a programmatic interface to interact with the Bfabric API. It allows developers to integrate Bfabric functionalities into custom Python applications. This library simplifies tasks like querying samples, uploading results, and interacting with the LIMS programmatically.
+BfabricPy is a Python library that provides a programmatic interface to interact with the B-Fabric API. It allows developers to integrate B-Fabric functionalities into custom Python applications. This library simplifies tasks like querying samples, uploading results, and interacting with the LIMS programmatically.
 
 BfabricPy is a dependency of this project and is fetched directly from its GitHub repository during installation.
 
@@ -148,7 +148,7 @@ This template provides a practical implementation of the bfabric-web-app library
 
 1. Setting up a Dash-based web application.
 
-2. Demonstrating data validation and API interaction with Bfabric.
+2. Demonstrating data validation and API interaction with B-Fabric.
 
 3. Serving as a starting point for custom scientific or analytical dashboards.
 
@@ -158,7 +158,7 @@ _For detailed examples and usage guides, refer to the [Documentation](https://py
 
 ## Deployment
 
-Follow these steps to set up and deploy the Bfabric Web App Template locally:
+Follow these steps to set up and deploy the B-Fabric Web App Template locally:
 
 ### 1. Fork and Clone the Repository
 
@@ -218,7 +218,7 @@ Create a file named `PARAMS.py` in the project root directory to define configur
 
 ### 5. Set Up `.bfabricpy.yml` Configuration File
 
-The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the Bfabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
+The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the B-Fabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
 
 Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`) and format it as follows:
 
@@ -233,9 +233,9 @@ Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`)
      base_url: https://your-bfabric-api-endpoint
    ```
 
-- **`login`**: The Bfabric user login.
+- **`login`**: The B-Fabric user login.
 - **`password`**: The corresponding password for the user.
-- **`base_url`**: The base API endpoint for your Bfabric instance.
+- **`base_url`**: The base API endpoint for your B-Fabric instance.
 
 Ensure the file is saved in the specified path and accessible by the application.
 
