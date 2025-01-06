@@ -53,9 +53,6 @@
 
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
-- [What Is B-Fabric?](#what-is-bfabric)
-- [What Is BfabricPy?](#what-is-bfabricpy)
-- [What Is Dash?](#what-is-dash)
 - [Deployment](#deployment)
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
   - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
@@ -64,6 +61,9 @@
   - [5. Set Up .bfabricpy.yml Configuration File](#5-set-up-bfabricpyyml-configuration-file)
   - [6. Run the Application](#6-run-the-application)
   - [7. Check It Out](#7-check-it-out)
+- [What Is B-Fabric?](#what-is-bfabric)
+- [What Is BfabricPy?](#what-is-bfabricpy)
+- [What Is Dash?](#what-is-dash)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -92,34 +92,6 @@ Key Features:
 * [![Dash][Dash.js]][Dash-url]
 * [![Plotly][Plotly.js]][Plotly-url]
 * [![Flask][Flask.js]][Flask-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## What Is B-Fabric?
-
-B-Fabric is a Laboratory Information Management System (LIMS) used for managing scientific experiments and their associated data in laboratories. It provides a platform for tracking samples, analyzing results, and organizing workflows efficiently. 
-
-For more details, visit the [Bfabric official website](https://fgcz-bfabric.uzh.ch/bfabric/).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-## What Is BfabricPy?
-
-BfabricPy is a Python library that provides a programmatic interface to interact with the B-Fabric API. It allows developers to integrate B-Fabric functionalities into custom Python applications. This library simplifies tasks like querying samples, uploading results, and interacting with the LIMS programmatically.
-
-BfabricPy is a dependency of this project and is fetched directly from its GitHub repository during installation.
-
-For more details, visit the [bfabricPy official documentation](https://github.com/fgcz/bfabricPy/tree/main).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-## What Is Dash?
-
-Dash is a Python framework for building interactive web applications. It combines the power of Plotly for data visualization and Flask for backend support, making it ideal for scientific and analytical dashboards.
-
-For more details, visit the [Dash official documentation](https://dash.plotly.com/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -222,6 +194,33 @@ Visit the following URL to see your application in action:
    http://localhost:8050
    ```
 
+## What Is B-Fabric?
+
+B-Fabric is a Laboratory Information Management System (LIMS) used for managing scientific experiments and their associated data in laboratories. It provides a platform for tracking samples, analyzing results, and organizing workflows efficiently. 
+
+For more details, visit the [Bfabric official website](https://fgcz-bfabric.uzh.ch/bfabric/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## What Is BfabricPy?
+
+BfabricPy is a Python library that provides a programmatic interface to interact with the B-Fabric API. It allows developers to integrate B-Fabric functionalities into custom Python applications. This library simplifies tasks like querying samples, uploading results, and interacting with the LIMS programmatically.
+
+BfabricPy is a dependency of this project and is fetched directly from its GitHub repository during installation.
+
+For more details, visit the [bfabricPy official documentation](https://github.com/fgcz/bfabricPy/tree/main).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## What Is Dash?
+
+Dash is a Python framework for building interactive web applications. It combines the power of Plotly for data visualization and Flask for backend support, making it ideal for scientific and analytical dashboards.
+
+For more details, visit the [Dash official documentation](https://dash.plotly.com/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap
 
