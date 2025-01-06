@@ -141,21 +141,6 @@ For more details, visit the [Dash official documentation](https://dash.plotly.co
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-## Usage
-
-This template provides a practical implementation of the bfabric-web-app library. Key use cases include:
-
-1. Setting up a Dash-based web application.
-
-2. Demonstrating data validation and API interaction with B-Fabric.
-
-3. Serving as a starting point for custom scientific or analytical dashboards.
-
-_For detailed examples and usage guides, refer to the [Documentation](https://pypi.org/project/bfabric-web-apps/)._
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Deployment
 
 Follow these steps to set up and deploy the B-Fabric Web App Template locally:
