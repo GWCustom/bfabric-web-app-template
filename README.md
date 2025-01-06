@@ -178,7 +178,7 @@ Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`)
 
 Ensure the file is saved in the specified path and accessible by the application.
 
-In case of issues, you may consult the [bfabricPy library documentation](https://fgcz.github.io/bfabricPy/) directly.
+If you encounter any issues, please refer to the [bfabricPy library documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
 
 ### 6. Run the Application
 
