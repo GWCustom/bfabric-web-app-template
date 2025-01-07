@@ -115,11 +115,17 @@ Follow these steps to set up and deploy the B-Fabric Web App Template locally:
 Choose one of the following options to create and activate a virtual environment:
 
 #### Using `virtualenv`:
-   ```sh
-   python3 -m venv my_app_1
-   source my_app_1/bin/activate  # Linux/Mac
-   my_app_1\Scripts\activate     # Windows
-   ```
+**For Linux/Mac:**
+```sh
+python3 -m venv my_app_1
+source my_app_1/bin/activate
+```
+
+**For Windows:**
+```sh
+python -m venv my_app_1
+my_app_1\Scripts\activate
+```
 
 #### Using `conda`:
    ```sh
