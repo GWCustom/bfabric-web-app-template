@@ -53,7 +53,7 @@
 
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
-- [Deployment](#deployment)
+- [Quickstart & Deployment](#Quickstart-&-deployment)
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
   - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
   - [3. Install Dependencies](#3-install-dependencies)
@@ -95,7 +95,7 @@ Key Features:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Deployment
+## Quickstart & Deployment
 
 Follow these steps to set up and deploy the B-Fabric Web App Template locally:
 
