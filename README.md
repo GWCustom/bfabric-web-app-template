@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/GWCustom/bfabric-web-app-template">
-    <img src="logo.png" alt="Logo" width="80" height="50.6">
+    <img src="logo_dark.png" alt="Logo" width="80" height="50.6">
   </a>
 
 <h3 align="center">B-Fabric Web App Template</h3>
@@ -268,14 +268,16 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more details.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/GWCustom/bfabric-web-app-template/blob/main/LICENSE) for more details.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Contact
 
-GWC GmbH - [GitHub](https://github.com/GWCustom) - [LinkedIn](https://www.linkedin.com/company/gwc-gmbh/posts/?feedView=all)
+GWC GmbH - [GitHub](https://github.com/GWCustom) - [LinkedIn](https://www.linkedin.com/company/gwc-gmbh/posts/?feedView=all)  
+Griffin White - [GitHub](https://github.com/grawfin) - [LinkedIn](https://www.linkedin.com/in/griffin-white-3aa20918a/)  
+Marc Zuber - [GitHub](https://github.com/MarcZuberGWC) - [LinkedIn](https://www.linkedin.com/in/marc-zuber-1161b3305/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -292,16 +294,16 @@ GWC GmbH - [GitHub](https://github.com/GWCustom) - [LinkedIn](https://www.linked
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/GWCustom/bfabric-web-apps.svg?style=for-the-badge
-[contributors-url]: https://github.com/GWCustom/bfabric-web-apps/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/GWCustom/bfabric-web-apps.svg?style=for-the-badge
-[forks-url]: https://github.com/GWCustom/bfabric-web-apps/network/members
-[stars-shield]: https://img.shields.io/github/stars/GWCustom/bfabric-web-apps.svg?style=for-the-badge
-[stars-url]: https://github.com/GWCustom/bfabric-web-apps/stargazers
-[issues-shield]: https://img.shields.io/github/issues/GWCustom/bfabric-web-apps.svg?style=for-the-badge
-[issues-url]: https://github.com/GWCustom/bfabric-web-apps/issues
-[license-shield]: https://img.shields.io/github/license/GWCustom/bfabric-web-apps.svg?style=for-the-badge
-[license-url]: https://github.com/GWCustom/bfabric-web-apps/blob/main/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[contributors-url]: https://github.com/GWCustom/bfabric-web-app-template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[forks-url]: https://github.com/GWCustom/bfabric-web-app-template/network/members
+[stars-shield]: https://img.shields.io/github/stars/GWCustom/bfabric-web-app-templates.svg?style=for-the-badge
+[stars-url]: https://github.com/GWCustom/bfabric-web-app-template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[issues-url]: https://github.com/GWCustom/bfabric-web-app-template/issues
+[license-shield]: https://img.shields.io/github/license/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[license-url]: https://github.com/GWCustom/bfabric-web-app-template/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/company/gwc-gmbh/posts/?feedView=all
 [product-screenshot]: images/screenshot.png
