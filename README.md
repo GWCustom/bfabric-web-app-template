@@ -298,7 +298,7 @@ Marc Zuber - [GitHub](https://github.com/MarcZuberGWC) - [LinkedIn](https://www.
 [contributors-url]: https://github.com/GWCustom/bfabric-web-app-template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
 [forks-url]: https://github.com/GWCustom/bfabric-web-app-template/network/members
-[stars-shield]: https://img.shields.io/github/stars/GWCustom/bfabric-web-app-templates.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
 [stars-url]: https://github.com/GWCustom/bfabric-web-app-template/stargazers
 [issues-shield]: https://img.shields.io/github/issues/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
 [issues-url]: https://github.com/GWCustom/bfabric-web-app-template/issues
