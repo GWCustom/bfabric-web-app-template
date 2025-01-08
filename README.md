@@ -53,7 +53,7 @@
 
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
-- [Quickstart & Deployment](#Quickstart-&-deployment)
+- [Quickstart & Deployment](#Quickstart-&-Deployment)
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
   - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
   - [3. Install Dependencies](#3-install-dependencies)
