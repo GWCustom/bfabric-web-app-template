@@ -77,6 +77,15 @@
 
 The `bfabric-web-app-template` serves as an example project built using the [`bfabric-web-app`](https://github.com/GWCustom/bfabric-web-apps) Python library. This template demonstrates how to quickly set up a web app that integrates with the B-Fabric Laboratory Information Management System (LIMS). It provides a starting point for developers to build their custom applications.
 
+### Available Templates
+We offer **two templates**:
+
+- **Basic Template (`basic_index.py`)**: A minimal setup for simple applications.
+- **Advanced Template (`index.py`)**: A more feature-rich version with additional integrations and functionalities.
+
+These templates allow developers to choose the level of complexity that best suits their project needs.
+
+
 Key Features:
 - **Preconfigured Setup**: Easily adapt the template to your use case.
 - **Integrated API Connection**: Demonstrates how to connect to B-Fabric via the `bfabric-web-app` library.
