@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/GWCustom/bfabric-web-app-template">
-    <img src="logo_dark.png" alt="Logo" width="80" height="50.6">
+    <img src="https://drive.google.com/file/d/1_RekqDx9tOY-4ziZLn7cG9sozMXIhrfE/view" alt="Logo" width="80" height="50.6">
   </a>
 
 <h3 align="center">B-Fabric Web App Template</h3>
