@@ -2,10 +2,19 @@
 
 import sys
 # Ensure the bfabric-web-apps module is accessible.
-sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
+# sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
+sys.path.append("../bfabric-web-apps")
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
-from bfabric_web_apps import load_config, get_static_layout, get_logger, get_power_user_wrapper
+from bfabric_web_apps import ( 
+    get_static_layout, 
+    get_logger, 
+    get_power_user_wrapper,
+    HOST, 
+    PORT,
+    DEV
+)
+
 import generic_bfabric
 from generic_bfabric import app
 
@@ -76,8 +85,6 @@ documentation_content = [
     )
 ]
 
-config = load_config("./PARAMS.py")
-
 app_title = "Bfabric App Template"
 
 app.layout = get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
@@ -109,7 +116,7 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
     # Determine sidebar and input states based on token_data and development mode.
     if token_data is None:
         sidebar_state = (True, True, True, True, True)
-    elif not config["DEV"]:
+    elif not DEV:
         sidebar_state = (False, False, False, False, False)
     else:
         sidebar_state = (True, True, True, True, True)
@@ -149,4 +156,4 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
     return (*sidebar_state, auth_div_content)
 
 if __name__ == "__main__":
-    app.run_server(debug=False, port=config["PORT"], host=config["HOST"])
+    app.run_server(debug=False, port=PORT, host=HOST)
