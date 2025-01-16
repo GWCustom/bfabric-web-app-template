@@ -1,5 +1,4 @@
-import sys
-sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
+
 from dash import html, dcc, Input, Output, State
 from bfabric_web_apps import load_config, get_static_layout, get_logger
 from generic_bfabric import app
