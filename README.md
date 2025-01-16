@@ -1,94 +1,327 @@
+
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/GWCustom/bfabric-web-app-template">
+    <img src="https://drive.google.com/uc?export=view&id=1_RekqDx9tOY-4ziZLn7cG9sozMXIhrfE" alt="Logo" width="80" height="50.6">
+  </a>
+
+<h3 align="center">B-Fabric Web App Template</h3>
+
+<p align="center">
+    A fully functional template app to demonstrate the usage of the 
+    <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-app</strong></a> Python library.
+    <br />
+    <br />
+    <a href="https://github.com/GWCustom/bfabric-web-app-template">View Demo</a>
+    ·
+    <a href="https://github.com/GWCustom/bfabric-web-app-template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/GWCustom/bfabric-web-app-template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
+
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Quickstart & Deployment](#quickstart--deployment)
+  - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
+  - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
+  - [3. Install Dependencies](#3-install-dependencies)
+  - [4. Configure Your Application](#4-configure-your-application)
+  - [5. Set Up .bfabricpy.yml Configuration File](#5-set-up-bfabricpyyml-configuration-file)
+  - [6. Run the Application](#6-run-the-application)
+  - [7. Check It Out](#7-check-it-out)
+- [What Is B-Fabric?](#what-is-bfabric)
+- [What Is BfabricPy?](#what-is-bfabricpy)
+- [What Is Dash?](#what-is-dash)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgments](#acknowledgments)
+
+
+
+
 ## About The Project
 
+The `bfabric_web_app_template` serves as an example project built using the [`bfabric-web-app`](https://github.com/GWCustom/bfabric-web-apps) Python library. This template demonstrates how to quickly set up a web app that integrates with the B-Fabric Laboratory Information Management System (LIMS). It provides a starting point for developers to build their custom applications.
+
+We offer **two templates**:
+
+- **Basic Template (`basic_index.py`)**: A minimal setup for simple applications.
+- **Advanced Template (`index.py`)**: A more feature-rich version with additional integrations and functionalities.
+
+These templates allow developers to choose the level of complexity that best suits their project needs.
 
 
-The Bfabric Web Apps project provides a flexible template for creating professional and user-friendly web applications within the Bfabric environment. It simplifies the development process by offering reusable components, built-in authentication, and customizable layouts.
+Key Features:
+- **Preconfigured Setup**: Easily adapt the template to your use case.
+- **Integrated API Connection**: Demonstrates how to connect to B-Fabric via the `bfabric-web-app` library.
+- **Dash Dashboard Integration**: Includes examples of data visualization with Plotly Dash.
+- **Fully Documented Code**: Explore the codebase for learning and extension.
 
-### Key Features
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Pre-built components for common UI elements such as sidebars, forms, and authentication.
-- Easy integration with the Bfabric platform.
-- Customizable templates for various application types.
-- Comprehensive documentation for developers of all skill levels.
 
 ### Built With
 
-- [Dash](https://plotly.com/dash/)
-- [Dash Bootstrap Components](https://dash-bootstrap-components.opensource.faculty.ai/)
-- [Python](https://www.python.org/)
+* [![Python][Python.js]][Python-url]
+* [![Dash][Dash.js]][Dash-url]
+* [![Plotly][Plotly.js]][Plotly-url]
+* [![Flask][Flask.js]][Flask-url]
 
-## Getting Started
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing.
+## Quickstart & Deployment
 
-### Prerequisites
+Follow these steps to set up and deploy the B-Fabric Web App Template locally:
 
-Ensure you have Python installed along with pip. Optionally, set up a virtual environment:
+### 1. Fork and Clone the Repository
 
+1. **Fork** the repository to your GitHub account.
+2. Clone the forked repository to your local machine:
+   
+   ```sh
+   git clone https://github.com/GWCustom/bfabric-web-app-template.git
+   cd bfabric-web-app-template
+   ```
+
+
+### 2. Set Up a Virtual Environment
+
+Choose one of the following options to create and activate a virtual environment:
+
+#### Using `virtualenv`:
+**For Linux/Mac:**
 ```sh
-python -m venv env
-source env/bin/activate  # On Windows, use `env\Scripts\activate`
+python3 -m venv my_app_1
+source my_app_1/bin/activate
 ```
 
-### Installation
+**For Windows:**
+```sh
+python -m venv my_app_1
+my_app_1\Scripts\activate
+```
 
-1. Clone the repository:
+#### Using `conda`:
    ```sh
-   git clone https://github.com/your_username/bfabric-web-apps.git
+   conda create -n my_app_1 pip
+   conda activate my_app_1
    ```
-2. Navigate to the project directory:
+
+#### Using `mamba`:
    ```sh
-   cd bfabric-web-apps
+   mamba create -n my_app_1 pip
+   mamba activate my_app_1
    ```
-3. Install required dependencies:
+
+
+### 3. Install Dependencies
+
+Once the virtual environment is active, install the required dependencies:
    ```sh
    pip install -r requirements.txt
    ```
-4. Configure the application:
-   Create a `PARAMS.py` file with the necessary configurations such as host, port, and credentials.
 
-## Usage
 
-Run the application using the following command:
+### 4. Configure Your Application
 
-```sh
-python index.py
-```
+Create a file named `PARAMS.py` in the project root directory to define configuration parameters for the app.
 
-Access the app on your local machine at `http://127.0.0.1:8050`.
+**Example `PARAMS.py`**:
+   ```python
+   # PARAMS.py
+   HOST = "0.0.0.0"  # Host to run the app (default: localhost)
+   PORT = 8050       # Port to serve the application
+   DEV = False       # Enable/disable debug mode
+   CONFIG_FILE_PATH = "~/.bfabricpy.yml"  # Path to the configuration file for credentials
+   ```
 
-For detailed examples and usage scenarios, refer to the [Documentation](https://example.com).
+### 5. Set Up `.bfabricpy.yml` Configuration File
+
+The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the B-Fabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
+
+Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`) and format it as follows:
+
+**Example `.bfabricpy.yml`**:
+   ```yaml
+   GENERAL:
+     default_config: PRODUCTION
+
+   PRODUCTION:
+     login: your_username
+     password: your_password
+     base_url: https://your-bfabric-api-endpoint
+   ```
+
+- **`login`**: The B-Fabric user login.
+- **`password`**: The corresponding password for the user.
+- **`base_url`**: The base API endpoint for your B-Fabric instance.
+
+Ensure the file is saved in the specified path and accessible by the application.
+
+If you encounter any issues, please refer to the [bfabricPy documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
+
+### 6. Run the Application
+
+Start the development server by running:
+   ```sh
+   python3 index.py
+   ```
+
+
+### 7. Check It Out
+
+Visit the following URL to see your application in action:
+   ```sh
+   http://localhost:8050
+   ```
+
+## What Is B-Fabric?
+
+B-Fabric is a Laboratory Information Management System (LIMS) used for managing scientific experiments and their associated data in laboratories. It provides a platform for tracking samples, analyzing results, and organizing workflows efficiently. 
+
+For more details, visit the [Bfabric official website](https://fgcz-bfabric.uzh.ch/bfabric/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## What Is BfabricPy?
+
+BfabricPy is a Python library that provides a programmatic interface to interact with the B-Fabric API. It allows developers to integrate B-Fabric functionalities into custom Python applications. This library simplifies tasks like querying samples, uploading results, and interacting with the LIMS programmatically.
+
+BfabricPy is a dependency of this project and is fetched directly from its GitHub repository during installation.
+
+For more details, visit the [bfabricPy official documentation](https://github.com/fgcz/bfabricPy/tree/main).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## What Is Dash?
+
+Dash is a Python framework for building interactive web applications. It combines the power of Plotly for data visualization and Flask for backend support, making it ideal for scientific and analytical dashboards.
+
+For more details, visit the [Dash official documentation](https://dash.plotly.com/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap
 
--
+See the [open issues](https://github.com/GWCustom/bfabric-web-apps/issues) for a full list of planned features and known issues.
 
-See the [open issues](https://github.com/your_username/bfabric-web-apps/issues) for a full list of proposed features and known issues.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the repository.
+2. Create a new branch:
+   ```sh
+   git checkout -b feature/YourFeature
+   ```
+3. Make your changes and commit them:
+   ```sh
+   git commit -m "Add feature: YourFeature"
+   ```
+4. Push to your branch:
+   ```sh
+   git push origin feature/YourFeature
+   ```
+5. Open a Pull Request.
+
+### Top contributors:
+
+<a href="https://github.com/GWCustom/bfabric-web-app-template/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=GWCustom/bfabric-web-app-template" alt="Top contributors" />
+</a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/GWCustom/bfabric-web-app-template/blob/main/LICENSE) for more details.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## Contact
 
-Your Name - [@your\_twitter](https://twitter.com/your_username) - [email@example.com](mailto\:email@example.com)
+GWC GmbH - [GitHub](https://github.com/GWCustom) - [LinkedIn](https://www.linkedin.com/company/gwc-gmbh/posts/?feedView=all)  
+Griffin White - [GitHub](https://github.com/grawfin) - [LinkedIn](https://www.linkedin.com/in/griffin-white-3aa20918a/)  
+Marc Zuber - [GitHub](https://github.com/MarcZuberGWC) - [LinkedIn](https://www.linkedin.com/in/marc-zuber-1161b3305/)
 
-Project Link: [https://github.com/your\_username/bfabric-web-apps](https://github.com/your_username/bfabric-web-apps)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## Acknowledgments
 
-- [Dash Documentation](https://dash.plotly.com/)
-- [Dash Bootstrap Components](https://dash-bootstrap-components.opensource.faculty.ai/)
-- [Choose an Open Source License](https://choosealicense.com)
-- [Img Shields](https://shields.io)
-- [GitHub Pages](https://pages.github.com)
+- [Plotly Dash](https://dash.plotly.com/)
+- [Flask Framework](https://flask.palletsprojects.com/)
+- [Python.org](https://www.python.org/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[contributors-url]: https://github.com/GWCustom/bfabric-web-app-template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[forks-url]: https://github.com/GWCustom/bfabric-web-app-template/network/members
+[stars-shield]: https://img.shields.io/github/stars/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[stars-url]: https://github.com/GWCustom/bfabric-web-app-template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[issues-url]: https://github.com/GWCustom/bfabric-web-app-template/issues
+[license-shield]: https://img.shields.io/github/license/GWCustom/bfabric-web-app-template.svg?style=for-the-badge
+[license-url]: https://github.com/GWCustom/bfabric-web-app-template/blob/main/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/company/gwc-gmbh/posts/?feedView=all
+[product-screenshot]: images/screenshot.png
+[Python.js]: https://img.shields.io/badge/python-000000?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+[Dash.js]: https://img.shields.io/badge/dash-20232A?style=for-the-badge&logo=dash&logoColor=61DAFB
+[Dash-url]: https://dash.plotly.com/
+[Plotly.js]: https://img.shields.io/badge/plotly-563D7C?style=for-the-badge&logo=plotly&logoColor=white
+[Plotly-url]: https://plotly.com/
+[Flask.js]: https://img.shields.io/badge/flask-0769AD?style=for-the-badge&logo=flask&logoColor=white
+[Flask-url]: https://flask.palletsprojects.com/en/stable/
+
