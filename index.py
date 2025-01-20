@@ -1,5 +1,3 @@
-
-
 import sys
 # Ensure the bfabric-web-apps module is accessible.
 # sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")

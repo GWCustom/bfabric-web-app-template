@@ -1,10 +1,14 @@
 import sys
 sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
 from dash import html, dcc, Input, Output, State
-from bfabric_web_apps import load_config, get_static_layout, get_logger
 from generic_bfabric import app
+from bfabric_web_apps import (
+    get_static_layout,
+    get_logger,
+    HOST, 
+    PORT,
+    DEV)
 
-config = load_config("./PARAMS.py")
 
 app_title = "My B-Fabric App (Basic)"
 
@@ -42,4 +46,4 @@ def update_user_display(token_data, entity_data):
         return "Please log in."
 
 if __name__ == "__main__":
-    app.run_server(debug=False, port=config["PORT"], host=config["HOST"])
+    app.run_server(debug=False, port=PORT, host=HOST)
