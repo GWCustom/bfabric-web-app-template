@@ -2,15 +2,21 @@
 from dash import html, dcc, Input, Output, State
 from bfabric_web_apps import load_config, get_static_layout, get_logger
 from generic_bfabric import app
+import dash_bootstrap_components as dbc
 
 config = load_config("./PARAMS.py")
 
 app_title = "My B-Fabric App (Basic)"
 
-app_specific_layout = html.Div([
-    html.H1("Welcome to My B-Fabric App"),
-    html.P("This is a quickstart example using bfabric-web-apps."),
-    html.Div(id='user-display')
+app_specific_layout = dbc.Row([
+    dbc.Col(
+        html.Div(style={"border-right": "2px solid #d4d7d9","height": "70vh","padding": "20px"}),
+        width=3,  # Width of the sidebar column.
+    ),
+    dbc.Col([
+        html.H1("Welcome to The Sample B-Fabric App", style={"margin": "2vh 0 2vh 0"}),
+        html.Div(id='user-display', style={"margin": "2vh 0 2vh 0"}),
+    ], width=9)
 ])
 
 documentation_content = [
