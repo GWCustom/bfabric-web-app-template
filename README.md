@@ -165,7 +165,7 @@ Once the virtual environment is active, install the required dependencies:
    ```
 
 
-### 4. Set Up `.bfabricpy.yml` Configuration File
+### 4. Set Up `.bfabricpy.yml` Configuration File as Described in [bfabricPy](https://fgcz.github.io/bfabricPy)
 
 The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the B-Fabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
 
@@ -188,7 +188,7 @@ Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`)
 
 Ensure the file is saved in the specified path and accessible by the application.
 
-If you encounter any issues, please refer to the [bfabricPy documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
+As mentioned above, if you encounter any issues, please refer to the [bfabricPy documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
 
 ### 5. Run the Application
 
