@@ -157,20 +157,7 @@ Once the virtual environment is active, install the required dependencies:
    ```
 
 
-### 4. Configure Your Application
-
-Create a file named `PARAMS.py` in the project root directory to define configuration parameters for the app.
-
-**Example `PARAMS.py`**:
-   ```python
-   # PARAMS.py
-   HOST = "0.0.0.0"  # Host to run the app (default: localhost)
-   PORT = 8050       # Port to serve the application
-   DEV = False       # Enable/disable debug mode
-   CONFIG_FILE_PATH = "~/.bfabricpy.yml"  # Path to the configuration file for credentials
-   ```
-
-### 5. Set Up `.bfabricpy.yml` Configuration File
+### 4. Set Up `.bfabricpy.yml` Configuration File
 
 The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the B-Fabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
 
@@ -195,7 +182,7 @@ Ensure the file is saved in the specified path and accessible by the application
 
 If you encounter any issues, please refer to the [bfabricPy documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
 
-### 6. Run the Application
+### 5. Run the Application
 
 Start the development server by running:
    ```sh
@@ -203,7 +190,7 @@ Start the development server by running:
    ```
 
 
-### 7. Check It Out
+### 6. Check It Out
 
 Visit the following URL to see your application in action:
    ```sh
