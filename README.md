@@ -59,7 +59,7 @@
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
   - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
   - [3. Install Dependencies](#3-install-dependencies)
-  - [4. Set Up .bfabricpy.yml Configuration File](#4-set-up-bfabricpyyml-configuration-file-as-Described-in)
+  - [4. Set Up .bfabricpy.yml Configuration File](#4-set-up-bfabricpyyml-configuration-file-as-described-in-bfabricpy)
   - [5. Run the Application](#5-run-the-application)
   - [6. Check It Out](#6-check-it-out)
 - [What Is B-Fabric?](#what-is-bfabric)
