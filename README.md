@@ -36,7 +36,7 @@
 <h3 align="center">B-Fabric Web App Template</h3>
 
 <p align="center">
-    A fully functional template app to demonstrate the usage of the 
+    Two fully functional template apps to demonstrate the usage of the  
     <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-app</strong></a> Python library.
     <br />
     <br />
