@@ -86,10 +86,18 @@ These templates allow developers to choose the level of complexity that best sui
 
 
 Key Features:
-- **Preconfigured Setup**: Easily adapt the template to your use case.
-- **Integrated API Connection**: Demonstrates how to connect to B-Fabric via the `bfabric-web-app` library.
-- **Dash Dashboard Integration**: Includes examples of data visualization with Plotly Dash.
-- **Fully Documented Code**: Explore the codebase for learning and extension.
+
+Shared Features:
+- **API Connectivity**: Easily connect to B-Fabric using the `bfabric-web-app` library, including URL parameter handling and authentication management.
+- **Preconfigured Template**: Streamlines development with a ready-to-use setup.
+- **Dash Integration**: Includes example layouts and callbacks.
+- **Logger Example**: Demonstrates logging functionality for tracking application events.
+
+Advanced Template Only:
+- **Interactive Sidebar**: Features sliders, dropdowns, and inputs for enhanced user interaction.
+- **Power User Wrapper**: Provides additional functionality for power users.
+- **Sophisticated Layout**: Includes a more advanced layout template.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
