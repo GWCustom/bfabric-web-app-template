@@ -53,6 +53,7 @@
 ## Table of Contents
 
 - [About The Project](#about-the-project)
+  - [Key Features](#Key-Features)
   - [Built With](#built-with)
 - [Quickstart & Deployment](#quickstart--deployment)
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
@@ -85,15 +86,15 @@ We offer **two templates**:
 These templates allow developers to choose the level of complexity that best suits their project needs.
 
 
-Key Features:
+### Key Features:
 
-Shared Features:
+#### Shared Features:
 - **API Connectivity**: Easily connect to B-Fabric using the `bfabric-web-app` library, including URL parameter handling and authentication management.
 - **Preconfigured Template**: Streamlines development with a ready-to-use setup.
 - **Dash Integration**: Includes example layouts and callbacks.
 - **Logger Example**: Demonstrates logging functionality for tracking application events.
 
-Advanced Template Only:
+#### Advanced Template Only:
 - **Interactive Sidebar**: Features sliders, dropdowns, and inputs for enhanced user interaction.
 - **Power User Wrapper**: Provides additional functionality for power users.
 - **Sophisticated Layout**: Includes a more advanced layout template.
