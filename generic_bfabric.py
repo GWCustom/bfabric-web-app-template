@@ -17,9 +17,6 @@ This module includes:
 
 # Required Imports
 # ----------------
-import sys
-# Ensure the bfabric-web-apps module is accessible.
-sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
 from dash import Input, Output, State
 from bfabric_web_apps import create_app, process_url_and_token, submit_bug_report
 from dash import html

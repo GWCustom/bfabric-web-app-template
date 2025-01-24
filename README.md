@@ -36,7 +36,7 @@
 <h3 align="center">B-Fabric Web App Template</h3>
 
 <p align="center">
-    A fully functional template app to demonstrate the usage of the 
+    Two fully functional template apps to demonstrate the usage of the  
     <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-app</strong></a> Python library.
     <br />
     <br />
@@ -53,15 +53,15 @@
 ## Table of Contents
 
 - [About The Project](#about-the-project)
+  - [Key Features](#Key-Features)
   - [Built With](#built-with)
 - [Quickstart & Deployment](#quickstart--deployment)
   - [1. Fork and Clone the Repository](#1-fork-and-clone-the-repository)
   - [2. Set Up a Virtual Environment](#2-set-up-a-virtual-environment)
   - [3. Install Dependencies](#3-install-dependencies)
-  - [4. Configure Your Application](#4-configure-your-application)
-  - [5. Set Up .bfabricpy.yml Configuration File](#5-set-up-bfabricpyyml-configuration-file)
-  - [6. Run the Application](#6-run-the-application)
-  - [7. Check It Out](#7-check-it-out)
+  - [4. Set Up .bfabricpy.yml Configuration File](#4-set-up-bfabricpyyml-configuration-file-as-described-in-bfabricpy)
+  - [5. Run the Application](#5-run-the-application)
+  - [6. Check It Out](#6-check-it-out)
 - [What Is B-Fabric?](#what-is-bfabric)
 - [What Is BfabricPy?](#what-is-bfabricpy)
 - [What Is Dash?](#what-is-dash)
@@ -76,7 +76,7 @@
 
 ## About The Project
 
-The `bfabric_web_app_template` serves as an example project built using the [`bfabric-web-app`](https://github.com/GWCustom/bfabric-web-apps) Python library. This template demonstrates how to quickly set up a web app that integrates with the B-Fabric Laboratory Information Management System (LIMS). It provides a starting point for developers to build their custom applications.
+The `bfabric_web_app_template` serves as an example project built using the [`bfabric-web-app`](https://github.com/GWCustom/bfabric-web-apps) Python library. These templates demonstrate how to quickly set up web apps that integrate with the B-Fabric Laboratory Information Management System (LIMS). They provide a starting point for developers to build their custom applications.
 
 We offer **two templates**:
 
@@ -86,11 +86,19 @@ We offer **two templates**:
 These templates allow developers to choose the level of complexity that best suits their project needs.
 
 
-Key Features:
-- **Preconfigured Setup**: Easily adapt the template to your use case.
-- **Integrated API Connection**: Demonstrates how to connect to B-Fabric via the `bfabric-web-app` library.
-- **Dash Dashboard Integration**: Includes examples of data visualization with Plotly Dash.
-- **Fully Documented Code**: Explore the codebase for learning and extension.
+### Key Features:
+
+#### Shared Features:
+- **API Connection**: Easily connect to B-Fabric using the `bfabric-web-app` library, including URL parameter handling and authentication management.
+- **Preconfigured Template**: Streamlines development with a ready-to-use setup.
+- **Dash Integration**: Includes example layouts and callbacks.
+- **Logger Example**: Demonstrates logging functionality for tracking application events.
+
+#### Advanced Template Only:
+- **Interactive Sidebar**: Features sliders, dropdowns, and inputs for enhanced user interaction.
+- **Power User Wrapper**: Provides additional functionality for power users.
+- **Sophisticated Layout**: Includes a more advanced app specific layout template.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -157,20 +165,7 @@ Once the virtual environment is active, install the required dependencies:
    ```
 
 
-### 4. Configure Your Application
-
-Create a file named `PARAMS.py` in the project root directory to define configuration parameters for the app.
-
-**Example `PARAMS.py`**:
-   ```python
-   # PARAMS.py
-   HOST = "0.0.0.0"  # Host to run the app (default: localhost)
-   PORT = 8050       # Port to serve the application
-   DEV = False       # Enable/disable debug mode
-   CONFIG_FILE_PATH = "~/.bfabricpy.yml"  # Path to the configuration file for credentials
-   ```
-
-### 5. Set Up `.bfabricpy.yml` Configuration File
+### 4. Set Up `.bfabricpy.yml` Configuration File as Described in [bfabricPy](https://fgcz.github.io/bfabricPy)
 
 The `.bfabricpy.yml` file is **essential for the power user configuration**. It provides the credentials needed for interacting with the B-Fabric API and is used for functionalities like the logger and API access. Without this file, certain backend features may not work.
 
@@ -193,9 +188,9 @@ Create a `.bfabricpy.yml` file in your home directory (e.g., `~/.bfabricpy.yml`)
 
 Ensure the file is saved in the specified path and accessible by the application.
 
-If you encounter any issues, please refer to the [bfabricPy documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
+As mentioned above, if you encounter any issues, please refer to the [bfabricPy documentation](https://fgcz.github.io/bfabricPy/) for further guidance.
 
-### 6. Run the Application
+### 5. Run the Application
 
 Start the development server by running:
    ```sh
@@ -203,7 +198,7 @@ Start the development server by running:
    ```
 
 
-### 7. Check It Out
+### 6. Check It Out
 
 Visit the following URL to see your application in action:
    ```sh

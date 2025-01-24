@@ -1,7 +1,3 @@
-import sys
-# Ensure the bfabric-web-apps module is accessible.
-# sys.path.append(r"C:\Users\marc_\Documents\Git\bfabric-web-apps")
-sys.path.append("../bfabric-web-apps")
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 from bfabric_web_apps import ( 
