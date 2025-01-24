@@ -10,11 +10,15 @@ from bfabric_web_apps import (
     get_power_user_wrapper,
     HOST, 
     PORT,
-    DEV
+    DEV,
+    CONFIG_FILE_PATH
 )
 
 import generic_bfabric
 from generic_bfabric import app
+
+
+CONFIG_FILE_PATH = "~/.bfabricpy.yml"
 
 sidebar = [
     html.P(id="sidebar_text", children="Select a Value"),  # Sidebar header text.
