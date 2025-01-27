@@ -37,7 +37,7 @@
 
 <p align="center">
     Two fully functional template apps to demonstrate the usage of the  
-    <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-app</strong></a> Python library.
+    <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-apps</strong></a> Python library.
     <br />
     <br />
     <a href="https://template-d12.bfabric.org/">View Demo</a>
