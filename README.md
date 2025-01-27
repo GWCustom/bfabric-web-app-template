@@ -40,7 +40,7 @@
     <a href="https://pypi.org/project/bfabric-web-apps/"><strong>bfabric-web-app</strong></a> Python library.
     <br />
     <br />
-    <a href="https://github.com/GWCustom/bfabric-web-app-template">View Demo</a>
+    <a href="https://template-d12.bfabric.org/">View Demo</a>
     ·
     <a href="https://github.com/GWCustom/bfabric-web-app-template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
