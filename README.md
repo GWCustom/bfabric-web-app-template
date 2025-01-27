@@ -80,8 +80,8 @@ The `bfabric_web_app_template` serves as an example project built using the [`bf
 
 We offer **two templates**:
 
-- **Basic Template (`basic_index.py`)**: A minimal setup for simple applications.
-- **Advanced Template (`index.py`)**: A more feature-rich version with additional integrations and functionalities.
+- **Basic Template (`basic_index.py`)**: A minimal setup for simple applications. [`View Demo`](https://template-d12.bfabric.org/)
+- **Advanced Template (`index.py`)**: A more feature-rich version with additional integrations and functionalities. [`View Demo`](https://small-template-d12.bfabric.org/)
 
 These templates allow developers to choose the level of complexity that best suits their project needs.
 
