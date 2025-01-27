@@ -235,7 +235,7 @@ For more details, visit the [Dash official documentation](https://dash.plotly.co
 
 ## Roadmap
 
-See the [open issues](https://github.com/GWCustom/bfabric-web-apps/issues) for a full list of planned features and known issues.
+See the [open issues](https://github.com/GWCustom/bfabric-web-app-template/issues) for a full list of planned features and known issues.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
