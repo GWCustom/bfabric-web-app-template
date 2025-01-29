@@ -23,7 +23,7 @@ from dash import html
 
 # Application Initialization
 # ---------------------------
-# Create and configure the Dash app instance.
+# Create the Dash app instance.
 app = create_app()
 
 # Callbacks
