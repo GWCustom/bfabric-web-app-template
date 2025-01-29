@@ -1,7 +1,7 @@
 
 from dash import html, dcc, Input, Output, State
 from generic_bfabric import app
-from bfabric_web_apps import get_static_layout, get_logger HOST, PORT
+from bfabric_web_apps import get_static_layout, get_logger, HOST, PORT
 import dash_bootstrap_components as dbc
 
 app_title = "My B-Fabric App (Basic)"
