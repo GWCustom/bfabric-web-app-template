@@ -38,6 +38,7 @@ app = create_app()
         Output('entity', 'data'),               # Store entity data.
         Output('page-title', 'children'),       # Update page title.
         Output('session-details', 'children'),  # Update session details.
+        Output('dynamic-link', 'href')  # Directly update the button!
     ],
     [Input('url', 'search')]                    # Extract token from URL parameters.
 )
