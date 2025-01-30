@@ -1,20 +1,11 @@
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
-from bfabric_web_apps import ( 
-    get_static_layout, 
-    get_logger, 
-    get_power_user_wrapper,
-    HOST, 
-    PORT,
-    DEV,
-    CONFIG_FILE_PATH
-)
-
+import bfabric_web_apps
 import generic_bfabric
 from generic_bfabric import app
 
 
-CONFIG_FILE_PATH = "~/.bfabricpy.yml"
+bfabric_web_apps.CONFIG_FILE_PATH = "~/.bfabricpy.yml"
 
 sidebar = [
     html.P(id="sidebar_text", children="Select a Value"),  # Sidebar header text.
@@ -85,7 +76,7 @@ documentation_content = [
 
 app_title = "Bfabric App Template"
 
-app.layout = get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
+app.layout = bfabric_web_apps.get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
     app_title,                          # The app title we defined previously
     app_specific_layout,     # The main content for the app defined in components.py
     documentation_content    # Documentation content for the app defined in components.py
@@ -114,7 +105,7 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
     # Determine sidebar and input states based on token_data and development mode.
     if token_data is None:
         sidebar_state = (True, True, True, True, True)
-    elif not DEV:
+    elif not bfabric_web_apps.DEV:
         sidebar_state = (False, False, False, False, False)
     else:
         sidebar_state = (True, True, True, True, True)
@@ -140,9 +131,9 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
         ]
         auth_div_content = dbc.Row([dbc.Col(component_data), dbc.Col(entity_details)])
          
-        power_user_wrapper = get_power_user_wrapper(token_data) # The `token_data` parameter must be provided. 
+        power_user_wrapper = bfabric_web_apps.get_power_user_wrapper(token_data) # The `token_data` parameter must be provided. 
 
-        L = get_logger(token_data) # The `token_data` parameter needs to be provided.
+        L = bfabric_web_apps.get_logger(token_data) # The `token_data` parameter needs to be provided.
 
         L.log_operation(
             "Example Log",                       # Operation name
@@ -154,4 +145,4 @@ def update_ui(slider_val, dropdown_val, input_val, n_clicks, token_data, entity_
     return (*sidebar_state, auth_div_content)
 
 if __name__ == "__main__":
-    app.run_server(debug=False, port=PORT, host=HOST)
+    app.run_server(debug=False, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
