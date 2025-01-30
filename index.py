@@ -6,6 +6,8 @@ from generic_bfabric import app
 
 
 bfabric_web_apps.CONFIG_FILE_PATH = "~/.bfabricpy.yml"
+bfabric_web_apps.DEVELOPER_EMAIL_ADDRESS = "marc@gwcustom.com"
+bfabric_web_apps.BUG_REPORT_EMAIL_ADDRESS = "marc@gwcustom.com"
 
 sidebar = [
     html.P(id="sidebar_text", children="Select a Value"),  # Sidebar header text.
