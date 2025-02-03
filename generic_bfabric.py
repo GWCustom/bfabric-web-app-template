@@ -36,6 +36,7 @@ app = create_app()
         Output('token', 'data'),                # Store authentication token.
         Output('token_data', 'data'),           # Store token metadata.
         Output('entity', 'data'),               # Store entity data.
+        Output('app_data', 'data'),               # Store app data.
         Output('page-title', 'children'),       # Update page title.
         Output('session-details', 'children'),  # Update session details.
         Output('dynamic-link', 'href')  # Directly update the button!
