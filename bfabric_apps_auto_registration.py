@@ -5,6 +5,23 @@ def get_user_input():
 
     systems = {"TEST":"TEST", "PROD":"PRODUCTION"}
 
+    technologies = {
+        "TEST": {
+            "1": "Genomics / Transcriptomics",
+            "2": "Proteomics",
+            "4": "Metabolomics / Biophysics",
+            "6": "General",
+            "10": "New Tech"
+        },
+        "PRODUCTION": {
+            "1": "Genomics / Transcriptomics",
+            "2": "Proteomics",
+            "4": "Metabolomics / Biophysics",
+            "6": "General",
+            "10": "Bioinformatics"
+        }
+    }
+
     system = input("In which system do you want to create the app? Input TEST for the test system and PROD for the production system: ").strip().upper()
     if system not in ["TEST", "PROD"]:
         raise ValueError("Invalid system input. Please input either TEST or PROD.")
