@@ -70,7 +70,7 @@ documentation_content = [
     html.P(
         [
             "Please check out the official documentation of ",
-            html.A("Bfabric Web Apps", href="https://pypi.org/project/bfabric-web-apps/", target="_blank"),
+            html.A("Bfabric Web Apps", href="https://bfabric-docs.gwc-solutions.ch/index.html"),
             "."
         ]
     )
