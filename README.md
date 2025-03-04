@@ -49,6 +49,12 @@
 </div>
 
 
+> **Version Compatibility Notice**  
+> To ensure proper functionality, the `bfabric-web-apps` library and the `bfabric-web-app-template` must have the **same version**.  
+> For example, if `bfabric-web-apps` is version `0.1.3`, then `bfabric-web-app-template` must also be `0.1.3`.  
+> Please verify and update the versions accordingly before running the application.
+
+
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
@@ -70,12 +76,6 @@
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgments](#acknowledgments)
-
-
-> **Version Compatibility Notice**  
-> To ensure proper functionality, the `bfabric-web-apps` library and the `bfabric-web-app-template` must have the **same version**.  
-> For example, if `bfabric-web-apps` is version `0.1.3`, then `bfabric-web-app-template` must also be `0.1.3`.  
-> Please verify and update the versions accordingly before running the application.
 
 ## About The Project
 
