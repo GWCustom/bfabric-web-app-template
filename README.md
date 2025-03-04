@@ -50,8 +50,8 @@
 
 
 > **Version Compatibility Notice**  
-> To ensure proper functionality, the `bfabric-web-apps` library and the `bfabric-web-app-template` must have the **same version**.  
-> For example, if `bfabric-web-apps` is version `0.1.3`, then `bfabric-web-app-template` must also be `0.1.3`.  
+> To ensure proper functionality, the `bfabric_web_apps` library and the `bfabric_web_app_template` must have the **same version**.  
+> For example, if `bfabric_web_apps` is version `0.1.3`, then `bfabric_web_app_template` must also be `0.1.3`.  
 > Please verify and update the versions accordingly before running the application.
 
 
