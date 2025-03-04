@@ -1,3 +1,9 @@
+
+# Ensure version compatibility between bfabric_web_apps and bfabric_web_app_template.
+# Both must be the same version to avoid compatibility issues.
+# Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
+# Verify and update versions accordingly before running the application.
+
 from dash import html, dcc, Input, Output, State
 from generic_bfabric import app
 from bfabric_web_apps import get_static_layout, get_logger, HOST, PORT
