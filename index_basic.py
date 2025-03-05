@@ -21,40 +21,35 @@ app_specific_layout = dbc.Row([
     ], width=9)
 ])
 
-documentation_content = [
-    html.H2("Documentation"),
-    html.P("Describe your app's features here.")
-]
+documentation_content = [html.H2("Documentation"),html.P("Describe your app's features here.")]
 
-app.layout = get_static_layout(
-    app_title,  
-    app_specific_layout,  
-    documentation_content  
-)
+app.layout = get_static_layout(app_title, app_specific_layout, documentation_content)
 
 @app.callback(
-    Output('user-display', 'children'),
-    Input('token_data', 'data'),
-    State('app_data', 'data')
+    [Output('user-display', 'children'),Output('submit-bug-report', 'disabled')],
+    [Input('token_data', 'data')],
+    [State('app_data', 'data')]
 )
 def update_user_display(token_data, app_data):
     if token_data and app_data:
-        user_name = token_data.get("user_data", "Unknown User")
-        app_name = app_data.get("name", "Unknown App")
-        app_description = app_data.get("description", "Unknown App")
-        
-        L = get_logger(token_data)
-        L.log_operation("User Login", "User logged in successfully.")
+        try:
+            user_name = token_data.get("user_data", "Unknown User")
+            app_name = app_data.get("name", "Unknown App")
+            app_description = app_data.get("description", "Unknown App")
+            
+            L = get_logger(token_data)
+            L.log_operation("User Login", "User logged in successfully.")
 
-        return html.Div([
-            html.P(f"User {user_name} has successfully logged in!"),
-            html.Br(),
-            html.P(f"Application Name: {app_name}"),
-            html.P(f"Application Description: {app_description}")
-        ])
+            return html.Div([
+                html.P(f"User {user_name} has successfully logged in!"), html.Br(),
+                html.P(f"Application Name: {app_name}"),
+                html.P(f"Application Description: {app_description}")
+            ]), False
+        except Exception as e:
+            return html.P(f"Error Logging into B-Fabric: {str(e)}"), True
 
     else:
-        return "Please log in."
+        return "Please log in.", True
 
 if __name__ == "__main__":
     app.run_server(debug=False, port=PORT, host=HOST)

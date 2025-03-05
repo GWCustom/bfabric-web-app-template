@@ -18,7 +18,7 @@ This module includes:
 # Required Imports
 # ----------------
 from dash import Input, Output, State
-from bfabric_web_apps import create_app, process_url_and_token, submit_bug_report
+from bfabric_web_apps import create_app, process_url_and_token, submit_bug_report, populate_workunit_details
 from dash import html
 
 # Application Initialization
@@ -36,10 +36,10 @@ app = create_app()
         Output('token', 'data'),                # Store authentication token.
         Output('token_data', 'data'),           # Store token metadata.
         Output('entity', 'data'),               # Store entity data.
-        Output('app_data', 'data'),               # Store app data.
+        Output('app_data', 'data'),             # Store app data.
         Output('page-title', 'children'),       # Update page title.
         Output('session-details', 'children'),  # Update session details.
-        Output('dynamic-link', 'href')  # Directly update the button!
+        Output('dynamic-link', 'href')          # Directly update the button!
     ],
     [Input('url', 'search')]                    # Extract token from URL parameters.
 )
@@ -53,6 +53,7 @@ def generic_process_url_and_token(url_params):
     Returns:
         tuple: Data for token, token metadata, entity, page title, and session details.
     """
+
     return process_url_and_token(url_params)
 
 ## Bug Report Handling
@@ -84,6 +85,28 @@ def generic_handle_bug_report(n_clicks, bug_description, token, entity_data):
         tuple: Success and failure alert states.
     """
     return submit_bug_report(n_clicks, bug_description, token, entity_data)
+
+
+# Adding workunit details
+# ---------------------
+@app.callback(
+    Output("workunits-content", "children"),  
+    [          
+        Input("token_data", "data"),
+        Input("refresh-workunits", "children")                
+    ]                          
+)
+def get_workunit_details(token_data, dummy):
+    """
+    Get workunit details for the authenticated user.
+
+    Parameters:
+        token (dict): Authentication token data.
+
+    Returns:
+        tuple: Workunit details.
+    """
+    return populate_workunit_details(token_data)
 
 # UI Components
 # --------------
