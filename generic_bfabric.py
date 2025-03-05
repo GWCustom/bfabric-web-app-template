@@ -15,6 +15,9 @@ This module includes:
   - Content to display for authenticated and unauthenticated users.
 """
 
+import sys
+sys.path.append("../bfabric-web-apps")
+
 # Required Imports
 # ----------------
 from dash import Input, Output, State
