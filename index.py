@@ -231,6 +231,6 @@ def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
 
 
 # Here we run the app on the specified host and port.
-if __name__ == "__main__"
+if __name__ == "__main__":
     app.run_server(debug=False, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
 
