@@ -219,13 +219,13 @@ def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
 
     if n_clicks:
         try: 
-            workunit_ids = bfabric_web_apps.create_workunit(
+            workunit_id = bfabric_web_apps.create_workunit(
                 token_data, "Bfabric App Template", "Bfabric App Template Workunit", app_id, container_id
             )
             for i in range(slider_val):
                 file_path = Path(f"resource_example_{i}.txt")
                 file_path.write_text(input_val)
-                bfabric_web_apps.create_resource(token_data, workunit_ids[0], file_path)
+                bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
 
             return True, False, None, html.Div()
         except Exception as e:
