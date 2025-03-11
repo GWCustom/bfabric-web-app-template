@@ -111,18 +111,3 @@ def get_workunit_details(token_data, dummy):
     """
     return populate_workunit_details(token_data)
 
-# UI Components
-# --------------
-
-## Unauthenticated User Content
-# ------------------------------
-# Message displayed to users who are not authenticated.
-no_auth = [
-    html.P("You are not currently logged into an active session. Please log into bfabric to continue:"),
-    html.A('Login to Bfabric', href='https://fgcz-bfabric.uzh.ch/bfabric/')  # Link to the Bfabric login page.
-]
-
-## Placeholder for Authenticated User Content
-# --------------------------------------------
-# Dynamic content displayed to authenticated users.
-auth = [html.Div(id="auth-div")]
