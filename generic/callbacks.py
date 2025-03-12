@@ -21,7 +21,13 @@ sys.path.append("../bfabric-web-apps")
 # Required Imports
 # ----------------
 from dash import Input, Output, State
-from bfabric_web_apps import create_app, process_url_and_token, submit_bug_report, populate_workunit_details
+from bfabric_web_apps import (
+    create_app, 
+    process_url_and_token, 
+    submit_bug_report, 
+    populate_workunit_details,
+    get_redis_queue_layout
+)
 from dash import html
 
 # Application Initialization
@@ -110,4 +116,24 @@ def get_workunit_details(token_data, dummy):
         tuple: Workunit details.
     """
     return populate_workunit_details(token_data)
+
+
+@app.callback(
+    Output("page-content-queue-children", "children"),
+    [
+        Input("token_data", "data"),
+        Input("queue-interval", "n_intervals")
+    ]
+)
+def get_queue_details(token_data, interval):
+    """
+    Get queue details for the authenticated user.
+
+    Parameters:
+        token (dict): Authentication token data.
+
+    Returns:
+        tuple: Queue details.
+    """
+    return get_redis_queue_layout()
 

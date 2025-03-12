@@ -32,6 +32,16 @@ sidebar = [
         id='example-dropdown'  # Dropdown ID for callback integration.
     ),
     html.Br(),
+    html.P(id="sidebar_text_3", children="Submit job to which queue?"),  # Text for the input field.
+    dcc.Dropdown(
+        options=[
+            {'label': 'light', 'value': 'light'},
+            {'label': 'heavy', 'value': 'heavy'}
+        ],
+        value='light',
+        id='queue'
+    ),
+    html.Br(),
     dbc.Input(value='Content of Resources', id='example-input'),  # Text input field.
     html.Br(),
     dbc.Button('Submit', id='example-button'),  # Button for user submission.
@@ -125,7 +135,7 @@ app.layout = bfabric_web_apps.get_static_layout(         # The function from bfa
     app_title,                          # The app title we defined previously
     app_specific_layout,     # The main content for the app defined in components.py
     documentation_content,    # Documentation content for the app defined in components.py
-    layout_config={"workunits": True, "queue": False, "bug": True}  # Configuration for the layout
+    layout_config={"workunits": True, "queue": True, "bug": True}  # Configuration for the layout
 )
 
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
@@ -210,10 +220,11 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
         State("example-dropdown", "value"),
         State("example-input", "value"),
         State("token_data", "data"),
+        State("queue", "value")
     ],
     prevent_initial_call=True
 )
-def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
+def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data, queue):
 
     app_id = token_data.get("application_data", None) 
     container_id = int(dropdown_val)
@@ -227,7 +238,9 @@ def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
                 file_path = Path(f"resource_example_{i}.txt")
                 file_path.write_text(input_val)
                 try:
-                    bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
+                    # bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
+                    bfabric_web_apps.q(queue).enqueue(bfabric_web_apps.test_job)
+
                 finally: 
                     file_path.unlink(missing_ok=True)
             return True, False, None, html.Div()
@@ -237,5 +250,5 @@ def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
 
 # Here we run the app on the specified host and port.
 if __name__ == "__main__":
-    app.run_server(debug=False, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
+    app.run_server(debug=bfabric_web_apps.DEBUG, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
 
