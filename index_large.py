@@ -3,11 +3,13 @@
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
 
+
+
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 import bfabric_web_apps
-import generic_bfabric
-from generic_bfabric import app
+from generic.callbacks import app
+from generic.components import no_auth
 from pathlib import Path
 
 bfabric_web_apps.CONFIG_FILE_PATH = "~/.bfabricpy.yml"
@@ -121,7 +123,8 @@ app_title = "Bfabric App Template"
 app.layout = bfabric_web_apps.get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
     app_title,                          # The app title we defined previously
     app_specific_layout,     # The main content for the app defined in components.py
-    documentation_content    # Documentation content for the app defined in components.py
+    documentation_content,    # Documentation content for the app defined in components.py
+    layout_config={"workunits": True, "queue": False, "bug": True}  # Configuration for the layout
 )
 
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
@@ -167,7 +170,7 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
 
     # Generate content for the auth-div based on authentication and entity data.
     if not entity_data or not token_data:
-        auth_div_content = html.Div(children=generic_bfabric.no_auth)
+        auth_div_content = html.Div(children=no_auth)
     else:
         try:
             component_data = [
@@ -222,8 +225,10 @@ def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
             for i in range(slider_val):
                 file_path = Path(f"resource_example_{i}.txt")
                 file_path.write_text(input_val)
-                bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
-
+                try:
+                    bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
+                finally: 
+                    file_path.unlink(missing_ok=True)
             return True, False, None, html.Div()
         except Exception as e:
             return False, True, f"Error: Workunit creation failed: {str(e)}", html.Div()

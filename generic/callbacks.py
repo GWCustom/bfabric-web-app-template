@@ -18,7 +18,13 @@ This module includes:
 # Required Imports
 # ----------------
 from dash import Input, Output, State
-from bfabric_web_apps import create_app, process_url_and_token, submit_bug_report, populate_workunit_details
+from bfabric_web_apps import (
+    create_app, 
+    process_url_and_token, 
+    submit_bug_report, 
+    populate_workunit_details,
+    get_redis_queue_layout
+)
 from dash import html
 
 # Application Initialization
@@ -108,18 +114,23 @@ def get_workunit_details(token_data, dummy):
     """
     return populate_workunit_details(token_data)
 
-# UI Components
-# --------------
 
-## Unauthenticated User Content
-# ------------------------------
-# Message displayed to users who are not authenticated.
-no_auth = [
-    html.P("You are not currently logged into an active session. Please log into bfabric to continue:"),
-    html.A('Login to Bfabric', href='https://fgcz-bfabric.uzh.ch/bfabric/')  # Link to the Bfabric login page.
-]
+@app.callback(
+    Output("page-content-queue-children", "children"),
+    [
+        Input("token_data", "data"),
+        Input("queue-interval", "n_intervals")
+    ]
+)
+def get_queue_details(token_data, interval):
+    """
+    Get queue details for the authenticated user.
 
-## Placeholder for Authenticated User Content
-# --------------------------------------------
-# Dynamic content displayed to authenticated users.
-auth = [html.Div(id="auth-div")]
+    Parameters:
+        token (dict): Authentication token data.
+
+    Returns:
+        tuple: Queue details.
+    """
+    return get_redis_queue_layout()
+

@@ -2,11 +2,13 @@
 # Both must be the same version to avoid compatibility issues.
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
-
-annotated-types==0.7.0
-attrs==24.2.0
 bfabric @ git+https://github.com/fgcz/bfabricPy.git@8c74f22ccdf1f370ed93e003cd8aad9ea42a4b98
 bfabric-web-apps==0.1.4
+
+annotated-types==0.7.0
+async-timeout==5.0.1
+attrs==24.2.0
+bfabric @ git+https://github.com/fgcz/bfabricPy.git@8c74f22ccdf1f370ed93e003cd8aad9ea42a4b98
 blinker==1.9.0
 certifi==2024.8.30
 charset-normalizer==3.4.0
@@ -41,12 +43,14 @@ Pygments==2.18.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
 PyYAML==6.0.2
+redis==5.2.1
 requests==2.32.3
 requests-file==2.1.0
 requests-toolbelt==1.0.0
 retrying==1.3.4
 rich==13.9.4
 rich-rst==1.3.1
+rq==2.1.0
 six==1.16.0
 suds==1.2.0
 tenacity==9.0.0
