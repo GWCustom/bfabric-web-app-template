@@ -7,7 +7,7 @@ import sys
 sys.path.append("../bfabric-web-apps")
 
 from dash import html, dcc, Input, Output, State
-from generic_bfabric import app
+from generic.callbacks import app
 from bfabric_web_apps import get_static_layout, get_logger, HOST, PORT
 import dash_bootstrap_components as dbc
 
@@ -26,7 +26,7 @@ app_specific_layout = dbc.Row([
 
 documentation_content = [html.H2("Documentation"),html.P("Describe your app's features here.")]
 
-app.layout = get_static_layout(app_title, app_specific_layout, documentation_content)
+app.layout = get_static_layout(app_title, app_specific_layout, documentation_content, layout_config={"bug":True})
 
 @app.callback(
     [Output('user-display', 'children'),Output('submit-bug-report', 'disabled')],
