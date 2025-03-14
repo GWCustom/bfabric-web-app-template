@@ -3,8 +3,7 @@
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
 bfabric @ git+https://github.com/fgcz/bfabricPy.git@8c74f22ccdf1f370ed93e003cd8aad9ea42a4b98
-bfabric-web-apps==0.1.4
-
+bfabric-web-apps==0.1.5
 annotated-types==0.7.0
 async-timeout==5.0.1
 attrs==24.2.0
@@ -39,6 +38,8 @@ plotly==5.24.1
 polars-lts-cpu==1.16.0
 pydantic==2.10.2
 pydantic_core==2.27.1
+pydantic-settings==2.8.1
+pydantic[email]
 Pygments==2.18.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
@@ -50,7 +51,7 @@ requests-toolbelt==1.0.0
 retrying==1.3.4
 rich==13.9.4
 rich-rst==1.3.1
-rq==2.1.0
+rq==1.15.1
 six==1.16.0
 suds==1.2.0
 tenacity==9.0.0
