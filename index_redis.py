@@ -172,7 +172,7 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
     if token_data is None:
         sidebar_state = (True, True, True, True, True, True, True)
     else:
-        sidebar_state = (True, True, True, True, True, True, True)
+        sidebar_state = (False, False, False, False, False, False, False)
 
     # Generate content for the auth-div based on authentication and entity data.
     if not entity_data or not token_data:
