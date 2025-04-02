@@ -3,6 +3,9 @@
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
 
+import sys
+sys.path.append("../bfabric-web-apps")
+
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 import bfabric_web_apps
@@ -18,7 +21,7 @@ dropdown_options = ['Genomics (project 2220)', 'Proteomics (project 3000)', 'Met
 dropdown_values = ['2220', '3000', '31230']
 
 # Here we define the sidebar of the UI, including the clickable components like dropdown and slider. 
-sidebar = [
+sidebar = bfabric_web_apps.components.charge_switch + [
     html.P(id="sidebar_text", children="How Many Resources to Create?"),  # Sidebar header text.
     dcc.Slider(0, 10, 1, value=4, id='example-slider'),  # Slider for selecting a numeric value.
     html.Br(),
@@ -128,11 +131,11 @@ documentation_content = [
 app_title = "Bfabric App Template"
 
 # here we use the get_static_layout function from bfabric_web_apps to set up the app layout.
-app.layout = bfabric_web_apps.get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
-    app_title,                          # The app title we defined previously
-    app_specific_layout,     # The main content for the app defined in components.py
-    documentation_content,    # Documentation content for the app defined in components.py
-    layout_config={"workunits": True, "queue": True, "bug": True}  # Configuration for the layout
+app.layout = bfabric_web_apps.get_static_layout(                    # The function from bfabric_web_apps that sets up the app layout.
+    base_title=app_title,                                           # The app title we defined previously
+    main_content=app_specific_layout,                               # The main content for the app defined in components.py
+    documentation_content=documentation_content,                    # Documentation content for the app defined in components.py
+    layout_config={"workunits": True, "queue": True, "bug": True}   # Configuration for the layout
 )
 
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
@@ -215,29 +218,47 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
         State("example-dropdown", "value"),
         State("example-input", "value"),
         State("token_data", "data"),
-        State("queue", "value")
+        State("queue", "value"),
+        State("charge_run", "on"), # This is the charge switch
+        State('token', 'data')
     ],
     prevent_initial_call=True
 )
-def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data, queue):
+def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue, charge_run, raw_token):
 
     app_id = token_data.get("application_data", None) 
-    container_id = int(dropdown_val)
 
+    if dropdown_val:
+        container_id = int(dropdown_val)
+    else:
+        return False, True, "Error: No container ID provided", html.Div()
+
+    # If the button has been clicked to submit the job: 
     if n_clicks:
         try: 
-            workunit_id = bfabric_web_apps.create_workunit(
-                token_data, "Bfabric App Template", "Bfabric App Template Workunit", app_id, container_id
-            )
+
+            file_bytes = {}
+            
             for i in range(slider_val):
+
+                # We create some dummy files to send to the worker
                 file_path = Path(f"resource_example_{i}.txt")
                 file_path.write_text(input_val)
-                try:
-                    # bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
-                    bfabric_web_apps.q(queue).enqueue(bfabric_web_apps.test_job)
+                bytes_content = bfabric_web_apps.read_file_as_bytes(file_path)
+                file_bytes[f"./resource_example_{i}.txt"] = bytes_content
+    
+            bfabric_web_apps.q(queue).enqueue(
+                bfabric_web_apps.run_main_job,
+                kwargs={
+                    "files_as_byte_strings": file_bytes, 
+                    "bash_commands": ["echo 'Hello World'"],
+                    "resource_paths": {k: container_id for k in file_bytes.keys()},
+                    "attachment_paths": {k: k.split("/")[-1] for k in file_bytes.keys()},
+                    "token": raw_token,
+                    "charges": charge_run
+                }
+            )
 
-                finally: 
-                    file_path.unlink(missing_ok=True)
             return True, False, None, html.Div()
         except Exception as e:
             return False, True, f"Error: Workunit creation failed: {str(e)}", html.Div()

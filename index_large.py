@@ -2,6 +2,8 @@
 # Both must be the same version to avoid compatibility issues.
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
+import sys
+sys.path.append("../bfabric-web-apps")
 
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
@@ -18,7 +20,7 @@ dropdown_options = ['Genomics (project 2220)', 'Proteomics (project 3000)', 'Met
 dropdown_values = ['2220', '3000', '31230']
 
 # Here we define the sidebar of the UI, including the clickable components like dropdown and slider. 
-sidebar = [
+sidebar = bfabric_web_apps.components.charge_switch + [
     html.P(id="sidebar_text", children="How Many Resources to Create?"),  # Sidebar header text.
     dcc.Slider(0, 10, 1, value=4, id='example-slider'),  # Slider for selecting a numeric value.
     html.Br(),
@@ -54,40 +56,40 @@ alerts = html.Div(
 
 # Here we define a Dash layout, which includes the sidebar, and the main content of the app. 
 app_specific_layout = dbc.Row(
-        id="page-content-main",
-        children=[
-            dcc.Loading(alerts), 
-            modal,  # Modal defined earlier.
-            dbc.Col(
-                html.Div(
-                    id="sidebar",
-                    children=sidebar,  # Sidebar content defined earlier.
-                    style={
-                        "border-right": "2px solid #d4d7d9",
-                        "height": "100%",
-                        "padding": "20px",
-                        "font-size": "20px"
-                    }
-                ),
-                width=3,  # Width of the sidebar column.
+    id="page-content-main",
+    children=[
+        dcc.Loading(alerts), 
+        modal,  # Modal defined earlier.
+        dbc.Col(
+            html.Div(
+                id="sidebar",
+                children=sidebar,  # Sidebar content defined earlier.
+                style={
+                    "border-right": "2px solid #d4d7d9",
+                    "height": "100%",
+                    "padding": "20px",
+                    "font-size": "20px"
+                }
             ),
-            dbc.Col(
-                html.Div(
-                    id="page-content",
-                    children=[
-                        html.Div(id="auth-div")  # Placeholder for `auth-div` to be updated dynamically.
-                    ],
-                    style={
-                        "margin-top": "20vh",
-                        "margin-left": "2vw",
-                        "font-size": "20px"
-                    }
-                ),
-                width=9,  # Width of the main content column.
+            width=3,  # Width of the sidebar column.
+        ),
+        dbc.Col(
+            html.Div(
+                id="page-content",
+                children=[
+                    html.Div(id="auth-div")  # Placeholder for `auth-div` to be updated dynamically.
+                ],
+                style={
+                    "margin-top": "20vh",
+                    "margin-left": "2vw",
+                    "font-size": "20px"
+                }
             ),
-        ],
-        style={"margin-top": "0px", "min-height": "40vh"}  # Overall styling for the row layout.
-    )
+            width=9,  # Width of the main content column.
+        ),
+    ],
+    style={"margin-top": "0px", "min-height": "40vh"}  # Overall styling for the row layout.
+)
 
 # Here we define the documentation content for the app.
 documentation_content = [
@@ -119,9 +121,9 @@ app_title = "Bfabric App Template"
 
 # here we use the get_static_layout function from bfabric_web_apps to set up the app layout.
 app.layout = bfabric_web_apps.get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
-    app_title,                          # The app title we defined previously
-    app_specific_layout,     # The main content for the app defined in components.py
-    documentation_content,    # Documentation content for the app defined in components.py
+    base_title=app_title,                          # The app title we defined previously
+    main_content=app_specific_layout,     # The main content for the app defined in components.py
+    documentation_content=documentation_content,    # Documentation content for the app defined in components.py
     layout_config={"workunits": True, "queue": False, "bug": True}  # Configuration for the layout
 )
 
@@ -205,10 +207,11 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
         State("example-dropdown", "value"),
         State("example-input", "value"),
         State("token_data", "data"),
+        State("charge_run", "on")
     ],
     prevent_initial_call=True
 )
-def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data):
+def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge_run):
 
     app_id = token_data.get("application_data", None) 
     container_id = int(dropdown_val)
