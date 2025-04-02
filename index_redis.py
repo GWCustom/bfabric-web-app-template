@@ -3,7 +3,6 @@
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
 
-
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 import bfabric_web_apps
@@ -172,8 +171,6 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
     # Determine sidebar and input states based on token_data and development mode.
     if token_data is None:
         sidebar_state = (True, True, True, True, True, True, True)
-    elif not bfabric_web_apps.DEV:
-        sidebar_state = (False, False, False, False, False, False, False)
     else:
         sidebar_state = (True, True, True, True, True, True, True)
 

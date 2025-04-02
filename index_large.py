@@ -163,8 +163,6 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
     # Determine sidebar and input states based on token_data and development mode.
     if token_data is None:
         sidebar_state = (True, True, True, True, True, True, True)
-    elif not bfabric_web_apps.DEV:
-        sidebar_state = (False, False, False, False, False, False, False)
     else:
         sidebar_state = (True, True, True, True, True, True, True)
 
