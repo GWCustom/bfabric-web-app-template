@@ -54,4 +54,4 @@ def update_user_display(token_data, app_data):
         return "Please log in.", True
 
 if __name__ == "__main__":
-    app.run_server(debug=False, port=PORT, host=HOST)
+    app.run(debug=False, port=PORT, host=HOST)

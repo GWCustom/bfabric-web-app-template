@@ -18,7 +18,7 @@ dropdown_options = ['Genomics (project 2220)', 'Proteomics (project 3000)', 'Met
 dropdown_values = ['2220', '3000', '31230']
 
 # Here we define the sidebar of the UI, including the clickable components like dropdown and slider. 
-sidebar = [
+sidebar = bfabric_web_apps.components.charge_switch + [
     html.P(id="sidebar_text", children="How Many Resources to Create?"),  # Sidebar header text.
     dcc.Slider(0, 10, 1, value=4, id='example-slider'),  # Slider for selecting a numeric value.
     html.Br(),
@@ -76,7 +76,10 @@ app_specific_layout = dbc.Row(
                         "border-right": "2px solid #d4d7d9",
                         "height": "100%",
                         "padding": "20px",
-                        "font-size": "20px"
+                        "font-size": "20px",
+                        "overflow-y":"scroll",
+                        "overflow-x":"hidden",
+                        "max-height":"65vh"
                     }
                 ),
                 width=3,  # Width of the sidebar column.
@@ -90,7 +93,10 @@ app_specific_layout = dbc.Row(
                     style={
                         "margin-top": "20vh",
                         "margin-left": "2vw",
-                        "font-size": "20px"
+                        "font-size": "20px",
+                        "overflow-y":"scroll",
+                        "overflow-x":"hidden",
+                        "max-height":"65vh"
                     }
                 ),
                 width=9,  # Width of the main content column.
@@ -128,11 +134,11 @@ documentation_content = [
 app_title = "Bfabric App Template"
 
 # here we use the get_static_layout function from bfabric_web_apps to set up the app layout.
-app.layout = bfabric_web_apps.get_static_layout(         # The function from bfabric_web_apps that sets up the app layout.
-    app_title,                          # The app title we defined previously
-    app_specific_layout,     # The main content for the app defined in components.py
-    documentation_content,    # Documentation content for the app defined in components.py
-    layout_config={"workunits": True, "queue": True, "bug": True}  # Configuration for the layout
+app.layout = bfabric_web_apps.get_static_layout(                    # The function from bfabric_web_apps that sets up the app layout.
+    base_title=app_title,                                           # The app title we defined previously
+    main_content=app_specific_layout,                               # The main content for the app defined in components.py
+    documentation_content=documentation_content,                    # Documentation content for the app defined in components.py
+    layout_config={"workunits": True, "queue": True, "bug": True}   # Configuration for the layout
 )
 
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
@@ -215,29 +221,64 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
         State("example-dropdown", "value"),
         State("example-input", "value"),
         State("token_data", "data"),
-        State("queue", "value")
+        State("queue", "value"),
+        State("charge_run", "on"), # This is the charge switch
+        State('url', 'search')
     ],
     prevent_initial_call=True
 )
-def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data, queue):
+def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue, charge_run, raw_token):
 
     app_id = token_data.get("application_data", None) 
-    container_id = int(dropdown_val)
 
+    if dropdown_val:
+        container_id = int(dropdown_val)
+    else:
+        return False, True, "Error: No container ID provided", html.Div()
+    
+    token, tdata, entity_data, app_data, _, _, _ = bfabric_web_apps.process_url_and_token(raw_token)
+
+    if token is None or tdata is None or entity_data is None or app_data is None: 
+        return False, True, f"Your session has expired. Please invoke the app again from B-Fabric: {token_data.get('webbase_data')}", html.Div()
+    
+    # If the button has been clicked to submit the job: 
     if n_clicks:
         try: 
-            workunit_id = bfabric_web_apps.create_workunit(
-                token_data, "Bfabric App Template", "Bfabric App Template Workunit", app_id, container_id
-            )
-            for i in range(slider_val):
-                file_path = Path(f"resource_example_{i}.txt")
-                file_path.write_text(input_val)
-                try:
-                    # bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
-                    bfabric_web_apps.q(queue).enqueue(bfabric_web_apps.test_job)
 
-                finally: 
-                    file_path.unlink(missing_ok=True)
+            attachment1_content = b"<html><body><h1>Hello World</h1></body></html>"
+            attachment1_name = f"attachment_1.html"
+
+            attachment2_content = b"<html><body><h1>Hello World a second time!!</h1></body></html>"
+            attachment2_name = f"attachment_2.html"
+            
+            # We specify some files which should get sent to the application server before the job starts
+            files_as_byte_strings = {attachment1_name: attachment1_content, attachment2_name: attachment2_content}
+            
+            # We create resources using the bash commands
+            bash_commands = [f"echo '{input_val}' > resource_{i+1}.txt" for i in range(slider_val)]
+
+            # We tell the job runner where to find the attachment files 
+            attachment_paths = {attachment1_name: attachment1_name, attachment2_name: attachment2_name}
+
+            # We tell the job runner where to find the resource files
+            resource_paths = {f"resource_{i+1}.txt": container_id for i in range(slider_val)}
+
+            arguments = {
+                    "files_as_byte_strings": files_as_byte_strings,
+                    "bash_commands": bash_commands,
+                    "resource_paths": resource_paths, 
+                    "attachment_paths": attachment_paths,
+                    "token": raw_token,
+                    "service_id":bfabric_web_apps.SERVICE_ID,
+                    "charge": charge_run
+                }
+    
+            # Submit the job to a queue! 
+            bfabric_web_apps.q(queue).enqueue(
+                bfabric_web_apps.run_main_job,
+                kwargs=arguments
+            )
+
             return True, False, None, html.Div()
         except Exception as e:
             return False, True, f"Error: Workunit creation failed: {str(e)}", html.Div()
@@ -245,5 +286,5 @@ def create_resources(n_clicks, slider_val, dropdown_val, input_val, token_data, 
 
 # Here we run the app on the specified host and port.
 if __name__ == "__main__":
-    app.run_server(debug=bfabric_web_apps.DEBUG, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
+    app.run(debug=bfabric_web_apps.DEBUG, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
 
