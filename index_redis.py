@@ -217,7 +217,7 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
         State("token_data", "data"),
         State("queue", "value"),
         State("charge_run", "on"), # This is the charge switch
-        State('token', 'data')
+        State('url', 'search')
     ],
     prevent_initial_call=True
 )
@@ -229,32 +229,49 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue,
         container_id = int(dropdown_val)
     else:
         return False, True, "Error: No container ID provided", html.Div()
+    
+    token, tdata, entity_data, app_data, _, _, _ = bfabric_web_apps.process_url_and_token(raw_token)
 
+    if token is None or tdata is None or entity_data is None or app_data is None: 
+        return False, True, f"Your session has expired. Please invoke the app again from B-Fabric: {token_data.get('webbase_data')}", html.Div()
+    
     # If the button has been clicked to submit the job: 
     if n_clicks:
         try: 
 
-            file_bytes = {}
-            
-            for i in range(slider_val):
+            attachment1_content = b"<html><body><h1>Hello World</h1></body></html>"
+            attachment1_name = f"attachment_1.html"
 
-                # We create some dummy files to send to the worker
-                file_path = Path(f"resource_example_{i}.txt")
-                file_path.write_text(input_val)
-                bytes_content = bfabric_web_apps.read_file_as_bytes(file_path)
-                file_bytes[f"./resource_example_{i}.txt"] = bytes_content
-    
-            bfabric_web_apps.q(queue).enqueue(
-                bfabric_web_apps.run_main_job,
-                kwargs={
-                    "files_as_byte_strings": file_bytes, 
-                    "bash_commands": ["echo 'Hello World'"],
-                    "resource_paths": {k: container_id for k in file_bytes.keys()},
-                    "attachment_paths": {k: k.split("/")[-1] for k in file_bytes.keys()},
+            attachment2_content = b"<html><body><h1>Hello World a second time!!</h1></body></html>"
+            attachment2_name = f"attachment_2.html"
+            
+            # We specify some files which should get sent to the application server before the job starts
+            files_as_byte_strings = {attachment1_name: attachment1_content, attachment2_name: attachment2_content}
+            
+            # We create resources using the bash commands
+            bash_commands = [f"echo '{input_val}' > resource_{i+1}.txt" for i in range(slider_val)]
+
+            # We tell the job runner where to find the attachment files 
+            attachment_paths = {attachment1_name: attachment1_name, attachment2_name: attachment2_name}
+
+            # We tell the job runner where to find the resource files
+            resource_paths = {f"resource_{i+1}.txt": container_id for i in range(slider_val)}
+
+            arguments = {
+                    "files_as_byte_strings": files_as_byte_strings,
+                    "bash_commands": bash_commands,
+                    "resource_paths": resource_paths, 
+                    "attachment_paths": attachment_paths,
                     "token": raw_token,
                     "service_id":bfabric_web_apps.SERVICE_ID,
                     "charge": charge_run
                 }
+            
+            print(arguments)
+    
+            bfabric_web_apps.q(queue).enqueue(
+                bfabric_web_apps.run_main_job,
+                kwargs=arguments
             )
 
             return True, False, None, html.Div()
