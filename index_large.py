@@ -2,8 +2,6 @@
 # Both must be the same version to avoid compatibility issues.
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
-import sys
-sys.path.append("../bfabric-web-apps")
 
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
@@ -235,5 +233,5 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge
 
 # Here we run the app on the specified host and port.
 if __name__ == "__main__":
-    app.run_server(debug=False, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
+    app.run(debug=False, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
 

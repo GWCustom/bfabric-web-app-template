@@ -2,7 +2,7 @@ annotated-types==0.7.0
 async-timeout==5.0.1
 attrs==25.3.0
 bfabric==1.13.23
-bfabric-web-apps==0.1.6
+-e git+https://github.com/GWCustom/bfabric-web-apps@340945d735abe5b05acf7e9c4411c51a3cfadc6f#egg=bfabric_web_apps
 blinker==1.9.0
 certifi==2025.1.31
 charset-normalizer==3.4.1
@@ -10,6 +10,7 @@ click==8.1.8
 cyclopts==3.11.2
 dash==3.0.2
 dash-bootstrap-components==2.0.0
+dash_daq==0.6.0
 dnspython==2.7.0
 docstring_parser==0.16
 docutils==0.21.2

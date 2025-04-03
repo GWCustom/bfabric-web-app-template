@@ -3,9 +3,6 @@
 # Example: If bfabric_web_apps is version 0.1.3, bfabric_web_app_template must also be 0.1.3.
 # Verify and update versions accordingly before running the application.
 
-import sys
-sys.path.append("../bfabric-web-apps")
-
 from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 import bfabric_web_apps
@@ -255,7 +252,8 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue,
                     "resource_paths": {k: container_id for k in file_bytes.keys()},
                     "attachment_paths": {k: k.split("/")[-1] for k in file_bytes.keys()},
                     "token": raw_token,
-                    "charges": charge_run
+                    "service_id":bfabric_web_apps.SERVICE_ID,
+                    "charge": charge_run
                 }
             )
 
@@ -266,5 +264,5 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue,
 
 # Here we run the app on the specified host and port.
 if __name__ == "__main__":
-    app.run_server(debug=bfabric_web_apps.DEBUG, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
+    app.run(debug=bfabric_web_apps.DEBUG, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
 
