@@ -76,7 +76,10 @@ app_specific_layout = dbc.Row(
                         "border-right": "2px solid #d4d7d9",
                         "height": "100%",
                         "padding": "20px",
-                        "font-size": "20px"
+                        "font-size": "20px",
+                        "overflow-y":"scroll",
+                        "overflow-x":"hidden",
+                        "max-height":"65vh"
                     }
                 ),
                 width=3,  # Width of the sidebar column.
@@ -90,7 +93,10 @@ app_specific_layout = dbc.Row(
                     style={
                         "margin-top": "20vh",
                         "margin-left": "2vw",
-                        "font-size": "20px"
+                        "font-size": "20px",
+                        "overflow-y":"scroll",
+                        "overflow-x":"hidden",
+                        "max-height":"65vh"
                     }
                 ),
                 width=9,  # Width of the main content column.
@@ -266,9 +272,8 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue,
                     "service_id":bfabric_web_apps.SERVICE_ID,
                     "charge": charge_run
                 }
-            
-            print(arguments)
     
+            # Submit the job to a queue! 
             bfabric_web_apps.q(queue).enqueue(
                 bfabric_web_apps.run_main_job,
                 kwargs=arguments

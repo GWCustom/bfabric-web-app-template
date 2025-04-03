@@ -205,27 +205,52 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
         State("example-dropdown", "value"),
         State("example-input", "value"),
         State("token_data", "data"),
-        State("charge_run", "on")
+        State("charge_run", "on"), # This is the charge switch
+        State('url', 'search')
     ],
     prevent_initial_call=True
 )
-def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge_run):
+def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge_run, raw_token):
 
     app_id = token_data.get("application_data", None) 
     container_id = int(dropdown_val)
 
+
+    # If the button has been clicked to submit the job: 
     if n_clicks:
         try: 
-            workunit_id = bfabric_web_apps.create_workunit(
-                token_data, "Bfabric App Template", "Bfabric App Template Workunit", app_id, container_id
-            )
-            for i in range(slider_val):
-                file_path = Path(f"resource_example_{i}.txt")
-                file_path.write_text(input_val)
-                try:
-                    bfabric_web_apps.create_resource(token_data, workunit_id, file_path)
-                finally: 
-                    file_path.unlink(missing_ok=True)
+
+            attachment1_content = b"<html><body><h1>Hello World</h1></body></html>"
+            attachment1_name = f"attachment_1.html"
+
+            attachment2_content = b"<html><body><h1>Hello World a second time!!</h1></body></html>"
+            attachment2_name = f"attachment_2.html"
+            
+            # We specify some files which should get sent to the application server before the job starts
+            files_as_byte_strings = {attachment1_name: attachment1_content, attachment2_name: attachment2_content}
+            
+            # We create resources using the bash commands
+            bash_commands = [f"echo '{input_val}' > resource_{i+1}.txt" for i in range(slider_val)]
+
+            # We tell the job runner where to find the attachment files 
+            attachment_paths = {attachment1_name: attachment1_name, attachment2_name: attachment2_name}
+
+            # We tell the job runner where to find the resource files
+            resource_paths = {f"resource_{i+1}.txt": container_id for i in range(slider_val)}
+
+            arguments = {
+                    "files_as_byte_strings": files_as_byte_strings,
+                    "bash_commands": bash_commands,
+                    "resource_paths": resource_paths, 
+                    "attachment_paths": attachment_paths,
+                    "token": raw_token,
+                    "service_id":bfabric_web_apps.SERVICE_ID,
+                    "charge": charge_run
+                }
+    
+            # Run the job locally right here! 
+            bfabric_web_apps.run_main_job(**arguments)
+
             return True, False, None, html.Div()
         except Exception as e:
             return False, True, f"Error: Workunit creation failed: {str(e)}", html.Div()
