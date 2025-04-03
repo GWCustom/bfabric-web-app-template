@@ -7,7 +7,7 @@
 
 from dash import html, dcc, Input, Output, State
 from generic.callbacks import app
-from bfabric_web_apps import get_static_layout, get_logger, HOST, PORT
+from bfabric_web_apps import get_static_layout, get_logger, HOST, PORT, DEBUG
 import dash_bootstrap_components as dbc
 
 app_title = "My B-Fabric App (Basic)"
@@ -54,4 +54,4 @@ def update_user_display(token_data, app_data):
         return "Please log in.", True
 
 if __name__ == "__main__":
-    app.run(debug=False, port=PORT, host=HOST)
+    app.run(debug=DEBUG, port=PORT, host=HOST)
