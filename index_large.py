@@ -232,6 +232,13 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge
             # We create resources using the bash commands
             bash_commands = [f"echo '{input_val}' > resource_{i+1}.txt" for i in range(slider_val)]
 
+            # Example project_id
+            project_id = "2220"
+
+            # Update charge_run based on its value
+            if charge_run and project_id:
+                charge_run = [project_id]
+
             # We tell the job runner where to find the attachment files 
             attachment_paths = {attachment1_name: attachment1_name, attachment2_name: attachment2_name}
 
