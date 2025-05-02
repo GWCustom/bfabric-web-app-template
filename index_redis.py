@@ -17,6 +17,7 @@ bfabric_web_apps.BUG_REPORT_EMAIL_ADDRESS = "gwtools@fgcz.system"
 dropdown_options = ['Genomics (project 2220)', 'Proteomics (project 3000)', 'Metabolomics (project 31230)']
 dropdown_values = ['2220', '3000', '31230']
 
+
 # Here we define the sidebar of the UI, including the clickable components like dropdown and slider. 
 sidebar = bfabric_web_apps.components.charge_switch + [
     html.P(id="sidebar_text", children="How Many Resources to Create?"),  # Sidebar header text.
@@ -41,7 +42,7 @@ sidebar = bfabric_web_apps.components.charge_switch + [
     html.Br(),
     dbc.Input(value='Content of Resources', id='example-input'),  # Text input field.
     html.Br(),
-    dbc.Button('Submit', id='example-button'),  # Button for user submission.
+    dbc.Button('Submit', id='sidebar-button'),  # Button for user submission.
 ]
 
 # here we define the modal that will pop up when the user clicks the submit button.
@@ -144,7 +145,7 @@ app.layout = bfabric_web_apps.get_static_layout(                    # The functi
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
 @app.callback(
     Output("modal-confirmation", "is_open"),
-    [Input("example-button", "n_clicks"), Input("Submit", "n_clicks")],
+    [Input("sidebar-button", "n_clicks"), Input("Submit", "n_clicks")],
     [State("modal-confirmation", "is_open")],
 )
 def toggle_modal(n1, n2, is_open):
@@ -159,7 +160,7 @@ def toggle_modal(n1, n2, is_open):
         Output('example-slider', 'disabled'),
         Output('example-dropdown', 'disabled'),
         Output('example-input', 'disabled'),
-        Output('example-button', 'disabled'),
+        Output('sidebar-button', 'disabled'),
         Output('submit-bug-report', 'disabled'),
         Output('Submit', 'disabled'),
         Output('auth-div', 'children'),
@@ -256,6 +257,13 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue,
             
             # We create resources using the bash commands
             bash_commands = [f"echo '{input_val}' > resource_{i+1}.txt" for i in range(slider_val)]
+
+            # Example project_id
+            project_id = "2220"
+
+            # Update charge_run based on its value
+            if charge_run and project_id:
+                charge_run = [project_id]
 
             # We tell the job runner where to find the attachment files 
             attachment_paths = {attachment1_name: attachment1_name, attachment2_name: attachment2_name}
