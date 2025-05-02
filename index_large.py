@@ -213,6 +213,10 @@ def update_ui(slider_val, dropdown_val, input_val, token_data, entity_data):
 def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge_run, raw_token):
 
     app_id = token_data.get("application_data", None) 
+
+    if dropdown_val is None:
+        return False, True, "Error: Please select a container Id", html.Div()
+
     container_id = int(dropdown_val)
 
 
