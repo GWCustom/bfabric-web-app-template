@@ -241,6 +241,8 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge
             # Update charge_run based on its value
             if charge_run and project_id:
                 charge_run = [project_id]
+            else:
+                charge_run = []
 
             # We tell the job runner where to find the attachment files 
             attachment_paths = {attachment1_name: attachment1_name, attachment2_name: attachment2_name}
