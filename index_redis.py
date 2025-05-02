@@ -42,7 +42,7 @@ sidebar = bfabric_web_apps.components.charge_switch + [
     html.Br(),
     dbc.Input(value='Content of Resources', id='example-input'),  # Text input field.
     html.Br(),
-    dbc.Button('Submit', id='example-button'),  # Button for user submission.
+    dbc.Button('Submit', id='sidebar-button'),  # Button for user submission.
 ]
 
 # here we define the modal that will pop up when the user clicks the submit button.
@@ -145,7 +145,7 @@ app.layout = bfabric_web_apps.get_static_layout(                    # The functi
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
 @app.callback(
     Output("modal-confirmation", "is_open"),
-    [Input("example-button", "n_clicks"), Input("Submit", "n_clicks")],
+    [Input("sidebar-button", "n_clicks"), Input("Submit", "n_clicks")],
     [State("modal-confirmation", "is_open")],
 )
 def toggle_modal(n1, n2, is_open):
@@ -160,7 +160,7 @@ def toggle_modal(n1, n2, is_open):
         Output('example-slider', 'disabled'),
         Output('example-dropdown', 'disabled'),
         Output('example-input', 'disabled'),
-        Output('example-button', 'disabled'),
+        Output('sidebar-button', 'disabled'),
         Output('submit-bug-report', 'disabled'),
         Output('Submit', 'disabled'),
         Output('auth-div', 'children'),

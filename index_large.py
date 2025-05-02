@@ -8,7 +8,6 @@ import dash_bootstrap_components as dbc
 import bfabric_web_apps
 from generic.callbacks import app
 from generic.components import no_auth
-from pathlib import Path
 
 bfabric_web_apps.CONFIG_FILE_PATH = "~/.bfabricpy.yml"
 bfabric_web_apps.DEVELOPER_EMAIL_ADDRESS = "griffin@gwcustom.com"
@@ -31,7 +30,7 @@ sidebar = bfabric_web_apps.components.charge_switch + [
     html.Br(),
     dbc.Input(value='Content of Resources', id='example-input'),  # Text input field.
     html.Br(),
-    dbc.Button('Submit', id='example-button'),  # Button for user submission.
+    dbc.Button('Submit', id='sidebar-button'),  # Button for user submission.
 ]
 
 # here we define the modal that will pop up when the user clicks the submit button.
@@ -128,7 +127,7 @@ app.layout = bfabric_web_apps.get_static_layout(         # The function from bfa
 # This callback is necessary for the modal to pop up when the user clicks the submit button.
 @app.callback(
     Output("modal-confirmation", "is_open"),
-    [Input("example-button", "n_clicks"), Input("Submit", "n_clicks")],
+    [Input("sidebar-button", "n_clicks"), Input("Submit", "n_clicks")],
     [State("modal-confirmation", "is_open")],
 )
 def toggle_modal(n1, n2, is_open):
@@ -143,7 +142,7 @@ def toggle_modal(n1, n2, is_open):
         Output('example-slider', 'disabled'),
         Output('example-dropdown', 'disabled'),
         Output('example-input', 'disabled'),
-        Output('example-button', 'disabled'),
+        Output('sidebar-button', 'disabled'),
         Output('submit-bug-report', 'disabled'),
         Output('Submit', 'disabled'),
         Output('auth-div', 'children'),
