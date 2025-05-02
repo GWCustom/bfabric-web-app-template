@@ -242,6 +242,17 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge
             # We tell the job runner where to find the resource files
             resource_paths = {f"resource_{i+1}.txt": container_id for i in range(slider_val)}
 
+            # We create a dataset to save to B-Fabric
+            dataset_info = {
+                str(container_id): {
+                    "resource_name": [f"resource_{i+1}" for i in range(slider_val)],
+                    "resource_description": [f"Resource {i+1} created by Bfabric Web Apps" for i in range(slider_val)],
+                    "resource_type": ["text/plain" for i in range(slider_val)],
+                    "resource_size": [len(bash_commands[i]) for i in range(slider_val)],
+                    "resource_path": [f"resource_{i+1}.txt" for i in range(slider_val)]
+                }
+            }
+
             arguments = {
                     "files_as_byte_strings": files_as_byte_strings,
                     "bash_commands": bash_commands,
@@ -249,7 +260,8 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge
                     "attachment_paths": attachment_paths,
                     "token": raw_token,
                     "service_id":bfabric_web_apps.SERVICE_ID,
-                    "charge": charge_run
+                    "charge": charge_run,
+                    "dataset_dict": dataset_info
                 }
     
             # Run the job locally right here! 
