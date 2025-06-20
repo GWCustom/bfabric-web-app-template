@@ -2,7 +2,7 @@ import sys
 sys.path.append("../bfabric-web-apps")
 
 import argparse
-from bfabric_web_apps import run_worker, REDIS_HOST, REDIS_PORT
+from bfabric_web_apps import run_worker, REDIS_HOST, REDIS_PORT, REDIS_USERNAME, REDIS_PASSWORD
 
 if __name__ == "__main__":
     # Parse command-line arguments
@@ -15,4 +15,4 @@ if __name__ == "__main__":
     queue_names = args.queues.split(",")
     
     # Run the worker with the specified queue names
-    run_worker(REDIS_HOST, REDIS_PORT, queue_names)
+    run_worker(REDIS_HOST, REDIS_PORT, queue_names, REDIS_USERNAME, REDIS_PASSWORD)
