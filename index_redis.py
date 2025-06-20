@@ -10,13 +10,8 @@ from generic.callbacks import app
 from generic.components import no_auth
 from pathlib import Path
 
-bfabric_web_apps.CONFIG_FILE_PATH = "~/.bfabricpy.yml"
-bfabric_web_apps.DEVELOPER_EMAIL_ADDRESS = "griffin@gwcustom.com"
-bfabric_web_apps.BUG_REPORT_EMAIL_ADDRESS = "gwtools@fgcz.system"
-
 dropdown_options = ['Genomics (project 2220)', 'Proteomics (project 3000)', 'Metabolomics (project 31230)']
 dropdown_values = ['2220', '3000', '31230']
-
 
 # Here we define the sidebar of the UI, including the clickable components like dropdown and slider. 
 sidebar = bfabric_web_apps.components.charge_switch + [
