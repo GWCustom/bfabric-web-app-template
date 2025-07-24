@@ -7,7 +7,7 @@ from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 import bfabric_web_apps
 from generic.callbacks import app
-from generic.components import no_auth
+from bfabric_web_apps import no_auth
 
 dropdown_options = ['Genomics (project 2220)', 'Proteomics (project 3000)', 'Metabolomics (project 31230)']
 dropdown_values = ['2220', '3000', '31230']
