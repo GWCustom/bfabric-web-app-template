@@ -232,7 +232,7 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, queue,
     else:
         return False, True, "Error: No container ID provided", html.Div()
     
-    token, tdata, entity_data, app_data, _, _, _ = bfabric_web_apps.process_url_and_token(raw_token)
+    token, tdata, entity_data, app_data, _, _, _, _ = bfabric_web_apps.process_url_and_token(raw_token)
 
     if token is None or tdata is None or entity_data is None or app_data is None: 
         return False, True, f"Your session has expired. Please invoke the app again from B-Fabric: {token_data.get('webbase_data')}", html.Div()
