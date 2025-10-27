@@ -45,19 +45,26 @@ app = create_app()
         Output('app_data', 'data'),             # Store app data.
         Output('page-title', 'children'),       # Update page title.
         Output('session-details', 'children'),  # Update session details.
-        Output('dynamic-link', 'href')          # Directly update the button!
+        Output('dynamic-link', 'href'),         # View Logs button href.
+        Output('bfabric-entity-link', 'href'),  # B-Fabric Entity button href.
     ],
     [Input('url', 'search')]                    # Extract token from URL parameters.
 )
 def generic_process_url_and_token(url_params):
     """
-    Handles URL parameter processing and manages authentication.
+    Process URL parameters to extract and validate the token, fetch entity/app data,
+    and populate page title, session details, and header links.
 
-    Parameters:
-        url_params (str): URL parameters containing the token.
+    Parameters
+    ----------
+    url_params : str
+        Query string containing the token.
 
-    Returns:
-        tuple: Data for token, token metadata, entity, page title, and session details.
+    Returns
+    -------
+    tuple
+        token, token_data, entity, app_data, page_title, session_details,
+        dynamic_link_href, bfabric_entity_link_href
     """
 
     return process_url_and_token(url_params)

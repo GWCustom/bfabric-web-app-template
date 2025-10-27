@@ -278,5 +278,5 @@ def submission(n_clicks, slider_val, dropdown_val, input_val, token_data, charge
 
 # Here we run the app on the specified host and port.
 if __name__ == "__main__":
-    app.run(debug=False, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
+    app.run(debug=bfabric_web_apps.DEBUG, port=bfabric_web_apps.PORT, host=bfabric_web_apps.HOST)
 
